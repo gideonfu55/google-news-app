@@ -1,4 +1,4 @@
-import React from 'react'
+import './news-item.styles.css'
 
 const NewsItem = ({ article }) => {
 
@@ -36,7 +36,7 @@ const NewsItem = ({ article }) => {
           <p className="news-item__description">{article.description}</p>
           <div className="news-item__meta">
             <span>{article.source.name}</span>
-            <span className="news-item__separator">•</span>
+            <span className="news-item__separator"> • </span>
             <span>{new Date(article.publishedAt).toLocaleDateString()}</span>
           </div>
         </div>
