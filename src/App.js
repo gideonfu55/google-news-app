@@ -1,21 +1,28 @@
 import logo from './logo.svg';
 import './App.css';
+
+import { useState } from 'react';
 import CategoryTabs from './components/category-tabs/category-tabs.component';
 // import NewsItem from './components/news-item/news-item.component';
 import NewsFeedBox from './components/news-feed-box/news-feed-box.component';
 
+
 const App = () => {
+
+  const [activeCategory, setActiveCategory] = useState('General');
 
   // Mock data for testing - to be replaced with API call to Google News API or alternate news feed API
   const articles = [
     {
+      key: 1,
       source: {
         id: "1",
         name: "TechCrunch"
       },
-      author: "Alex Wilhelm",
       title: "USDC stablecoin issuer Circle files confidentially for an IPO",
-      description: "Circle is for the first time allowing general users to earn rewards by holding cryptocurrency TechCrunch Coinbase will now let you earn interest on your Dai holdings TechCrunch Coinbase to allow users to earn interest on their crypto holdings CNBC Coinbase to …",
+      author: "Alex Wilhelm",
+      category: ["General", "Technology"],
+      description: "Circle is for the first time allowing general users to earn rewards by holding cryptocurrency. TechCrunch Coinbase to allow users to earn interest on their crypto holdings CNBC Coinbase to …",
       url: "https://techcrunch.com/2024/01/11/usdc-stablecoin-issuer-circle-files-confidentially-for-an-ipo/",
       urlToImage: require('../src/assets/images/test-article-thumbnail.png'),
       publishedAt: "2024-01-11T07:21:00Z",
@@ -23,9 +30,24 @@ const App = () => {
     },
   ];
 
+  const handleCategoryChange = (category) => {
+    setActiveCategory(category);
+    // Here you would typically fetch new articles for the selected category
+  };
+
+  const filteredArticles = articles.filter(article =>
+    article.category.includes(activeCategory)
+  );
+
   return (
     <div className="App">
-      <CategoryTabs />
+      {/* Tab where list of news feeds can be retrieved based on categories */}
+      <CategoryTabs 
+        activeCategory={activeCategory}
+        onCategoryChange={handleCategoryChange}
+      />
+
+      {/* Placeholder for development in progress 🙂 */}
       <header className="App-header">
         <div style={{ display: 'flex', flexDirection:'column', textAlign: 'center', alignItems: 'center' }}>
           <img src={logo} className="App-logo" alt="logo" />
@@ -34,8 +56,9 @@ const App = () => {
           Google News App - Coming Soon
         </p>
 
-        <NewsFeedBox articles={ articles } />
-        {/* <NewsItem /> */}
+        {/* News feed box to display list of news articles - multiple sections to be used */}
+        <NewsFeedBox articles={ filteredArticles } />
+
       </header>
     </div>
   );

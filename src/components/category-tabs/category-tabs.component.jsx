@@ -3,7 +3,7 @@ import './category-tabs.styles.css'
 const CategoryTabs = ({ activeCategory, onCategoryChange }) => {
 
   const categories = [
-    { id: 'Local', label: 'Local' },
+    { id: 'General', label: 'General' },
     { id: 'Finance', label: 'Finance' },
     { id: 'Technology', label: 'Technology' },
     { id: 'Sports', label: 'Sports' },
@@ -18,10 +18,12 @@ const CategoryTabs = ({ activeCategory, onCategoryChange }) => {
             <button
               key={id}
               onClick={() => onCategoryChange(id)}
-              className={`category-tabs__button ${activeCategory === id
+              className={`category-tabs__button 
+                ${activeCategory === id
                   ? 'category-tabs__button--active'
                   : 'category-tabs__button--inactive'
-                }`}
+                }`
+              }
             >
               {label}
             </button>
