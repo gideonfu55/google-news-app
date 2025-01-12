@@ -3,7 +3,6 @@ import { Search, ChevronDown } from 'lucide-react';
 import './news-search-filter.styles.css';
 
 const NewsSearchFilter = ({ 
-  // onSearch,
   articles = [],
   activeCategory = 'General',
   onFilteredResults = () => { }
@@ -33,7 +32,6 @@ const NewsSearchFilter = ({
   ];
 
   const filterArticles = (params) => {
-    // Add null checks
     if (!articles || !Array.isArray(articles)) {
       console.warn('Articles prop is missing or invalid');
       return [];
@@ -99,9 +97,12 @@ const NewsSearchFilter = ({
     }));
   };
 
+  /**
+   * Handle form submission when clicking the Search button.
+   * Filter articles based on the search parameters and call onFilteredResults callback.
+   */
   const handleSubmit = (e) => {
     e.preventDefault();
-    // onSearch(searchParams);
     const filteredResults = filterArticles(searchParams);
     if (typeof onFilteredResults === 'function') {
       onFilteredResults(filteredResults);
@@ -109,6 +110,9 @@ const NewsSearchFilter = ({
     setIsExpanded(false);
   };
 
+  /**
+   * Clear the search filter form and reset the search parameters
+   */
   const handleClear = () => {
     setSearchParams({
       exactPhrase: '',
@@ -119,6 +123,19 @@ const NewsSearchFilter = ({
     });
   };
 
+  /**
+   * Handle form submission when pressing Enter key.
+   */
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      handleSubmit(e);
+    }
+  };
+
+  /**
+   * Close the search filter form when clicking outside of it.
+   */
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (filterRef.current && !filterRef.current.contains(event.target)) {
@@ -138,12 +155,13 @@ const NewsSearchFilter = ({
         <Search className="search-filter__icon" />
         <input
           type="text"
-          placeholder="Search for topics, locations & sources"
+          placeholder="Search for article by title or description"
           className="search-filter__input"
           value={searchParams.hasWords}
           onChange={(e) => handleInputChange({
             target: { name: 'hasWords', value: e.target.value }
           })}
+          onKeyDown={handleKeyDown}
         />
         <button
           className="search-filter__expand-button"
@@ -168,54 +186,59 @@ const NewsSearchFilter = ({
           <div className="search-filter__group">
             <label className="search-filter__label">Exact phrase</label>
             <input
+              className="search-filter__control"
               type="text"
               name="exactPhrase"
               value={searchParams.exactPhrase}
               onChange={handleInputChange}
-              className="search-filter__control"
+              onKeyDown={handleKeyDown}
             />
           </div>
 
           <div className="search-filter__group">
             <label className="search-filter__label">Has words</label>
             <input
+              className="search-filter__control"
               type="text"
               name="hasWords"
               value={searchParams.hasWords}
               onChange={handleInputChange}
-              className="search-filter__control"
+              onKeyDown={handleKeyDown}
             />
           </div>
 
           <div className="search-filter__group">
             <label className="search-filter__label">Exclude words</label>
             <input
+              className="search-filter__control"
               type="text"
               name="excludeWords"
               value={searchParams.excludeWords}
               onChange={handleInputChange}
-              className="search-filter__control"
+              onKeyDown={handleKeyDown}
             />
           </div>
 
           <div className="search-filter__group">
             <label className="search-filter__label">Website</label>
             <input
+              className="search-filter__control"
               type="text"
               name="website"
               value={searchParams.website}
               onChange={handleInputChange}
-              className="search-filter__control"
+              onKeyDown={handleKeyDown}
             />
           </div>
 
           <div className="search-filter__group">
             <label className="search-filter__label">Date</label>
             <select
+              className="search-filter__select"
               name="dateRange"
               value={searchParams.dateRange}
               onChange={handleInputChange}
-              className="search-filter__select"
+              onKeyDown={handleKeyDown}
             >
               {dateOptions.map(option => (
                 <option key={option.value} value={option.value}>
@@ -227,15 +250,15 @@ const NewsSearchFilter = ({
 
           <div className="search-filter__actions">
             <button
+              className="search-filter__clear"
               type="button"
               onClick={handleClear}
-              className="search-filter__clear"
             >
               Clear
             </button>
             <button
-              type="submit"
               className="search-filter__submit"
+              type="submit"
             >
               Search
             </button>
