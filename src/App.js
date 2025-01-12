@@ -5,6 +5,7 @@ import { useState } from 'react';
 import CategoryTabs from './components/category-tabs/category-tabs.component';
 // import NewsItem from './components/news-item/news-item.component';
 import NewsFeedBox from './components/news-feed-box/news-feed-box.component';
+import NewsSearchFilter from './components/news-search-filter/news-search-filter.component';
 
 
 const App = () => {
@@ -36,7 +37,7 @@ const App = () => {
       },
       title: "Global Markets Rally as Inflation Slows",
       author: "Jane Doe",
-      category: ["Finance"],
+      category: ["General", "Finance"],
       description: "Stocks soared as new inflation data showed a significant slowdown, boosting investor confidence worldwide.",
       url: "https://www.bloomberg.com/2024/01/12/global-markets-rally-as-inflation-slows/",
       urlToImage: require('../src/assets/images/test-article-thumbnail.png'),
@@ -51,7 +52,7 @@ const App = () => {
       },
       title: "LeBron James Leads Lakers to Stunning Victory",
       author: "John Smith",
-      category: ["Sports"],
+      category: ["General", "Sports"],
       description: "LeBron James scored a game-high 42 points, leading the Lakers to a thrilling comeback win over the Warriors.",
       url: "https://www.espn.com/2024/01/11/lebron-james-leads-lakers-to-victory/",
       urlToImage: require('../src/assets/images/test-article-thumbnail.png'),
@@ -66,7 +67,7 @@ const App = () => {
       },
       title: "Scientists Discover Potentially Habitable Exoplanet",
       author: "Emily Clark",
-      category: ["Science"],
+      category: ["General", "Science"],
       description: "Astronomers have identified a new exoplanet in the habitable zone of its star, sparking excitement about extraterrestrial life.",
       url: "https://www.nationalgeographic.com/2024/01/10/scientists-discover-potentially-habitable-exoplanet/",
       urlToImage: require('../src/assets/images/test-article-thumbnail.png'),
@@ -81,7 +82,7 @@ const App = () => {
       },
       title: "Blockbuster Movie Shatters Box Office Records",
       author: "Sarah Lee",
-      category: ["Entertainment", "General"],
+      category: ["General", "Entertainment"],
       description: "The latest action-packed movie has broken global box office records in its opening weekend.",
       url: "https://www.variety.com/2024/01/10/blockbuster-movie-shatters-box-office-records/",
       urlToImage: require('../src/assets/images/test-article-thumbnail.png'),
@@ -92,7 +93,6 @@ const App = () => {
 
   const handleCategoryChange = (category) => {
     setActiveCategory(category);
-    // Here you would typically fetch new articles for the selected category
   };
 
   const filteredArticles = articles.filter(article =>
@@ -106,6 +106,13 @@ const App = () => {
         activeCategory={activeCategory}
         onCategoryChange={handleCategoryChange}
       />
+
+      <br />
+      
+      {/* Search filter to filter news articles based on search criteria */}
+      <div className="search-filter">
+        <NewsSearchFilter />
+      </div>
 
       {/* Placeholder for development in progress 🙂 */}
       <header className="App-header">
