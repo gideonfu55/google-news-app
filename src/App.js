@@ -3,7 +3,6 @@ import './App.css';
 
 import { useEffect, useState, useMemo } from 'react';
 import CategoryTabs from './components/category-tabs/category-tabs.component';
-// import NewsItem from './components/news-item/news-item.component';
 import NewsFeedBox from './components/news-feed-box/news-feed-box.component';
 import NewsSearchFilter from './components/news-search-filter/news-search-filter.component';
 
