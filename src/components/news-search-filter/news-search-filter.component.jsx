@@ -2,7 +2,12 @@ import { useState } from 'react';
 import { Search, ChevronDown } from 'lucide-react';
 import './news-search-filter.styles.css';
 
-const NewsSearchFilter = ({ onSearch }) => {
+const NewsSearchFilter = ({ 
+  // onSearch,
+  articles = [],
+  activeCategory = 'General',
+  onFilteredResults = () => { }
+}) => {
   const [isExpanded, setIsExpanded] = useState(false);
   const [searchParams, setSearchParams] = useState({
     exactPhrase: '',
@@ -20,6 +25,65 @@ const NewsSearchFilter = ({ onSearch }) => {
     { value: 'year', label: 'Past year' }
   ];
 
+  const filterArticles = (params) => {
+    // Add null checks
+    if (!articles || !Array.isArray(articles)) {
+      console.warn('Articles prop is missing or invalid');
+      return [];
+    }
+
+    let filtered = articles.filter(article =>
+      article.category.includes(activeCategory)
+    );
+
+    if (params.exactPhrase) {
+      filtered = filtered.filter(article =>
+        article.title.toLowerCase().includes(params.exactPhrase.toLowerCase())
+      );
+    }
+
+    if (params.hasWords) {
+      const words = params.hasWords.split(' ');
+      filtered = filtered.filter(article =>
+        words.some(word => article.title.toLowerCase().includes(word.toLowerCase()))
+      );
+    }
+
+    if (params.excludeWords) {
+      const excludedWords = params.excludeWords.split(' ');
+      filtered = filtered.filter(article =>
+        !excludedWords.some(word => article.title.toLowerCase().includes(word.toLowerCase()))
+      );
+    }
+
+    if (params.website) {
+      filtered = filtered.filter(article =>
+        article.source.name.toLowerCase().includes(params.website.toLowerCase())
+      );
+    }
+
+    if (params.dateRange !== 'any') {
+      const now = new Date();
+      filtered = filtered.filter(article => {
+        const articleDate = new Date(article.publishedAt);
+        switch (params.dateRange) {
+          case 'hour':
+            return (now - articleDate) <= 3600000;
+          case 'day':
+            return (now - articleDate) <= 86400000;
+          case 'week':
+            return (now - articleDate) <= 604800000;
+          case 'year':
+            return (now - articleDate) <= 31536000000;
+          default:
+            return true;
+        }
+      });
+    }
+
+    return filtered;
+  };
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setSearchParams(prev => ({
@@ -30,7 +94,12 @@ const NewsSearchFilter = ({ onSearch }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onSearch(searchParams);
+    // onSearch(searchParams);
+    const filteredResults = filterArticles(searchParams);
+    if (typeof onFilteredResults === 'function') {
+      onFilteredResults(filteredResults);
+    }
+    setIsExpanded(false);
   };
 
   const handleClear = () => {

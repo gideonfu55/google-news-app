@@ -1,7 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
 
-import { useState } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 import CategoryTabs from './components/category-tabs/category-tabs.component';
 // import NewsItem from './components/news-item/news-item.component';
 import NewsFeedBox from './components/news-feed-box/news-feed-box.component';
@@ -9,11 +9,9 @@ import NewsSearchFilter from './components/news-search-filter/news-search-filter
 
 
 const App = () => {
-
-  const [activeCategory, setActiveCategory] = useState('General');
-
+  
   // Mock data for testing - to be replaced with API call to Google News API or alternate news feed API
-  const articles = [
+  const articles = useMemo(() => [
     {
       key: 1,
       source: {
@@ -31,7 +29,7 @@ const App = () => {
     },
     {
       "key": 2,
-      source:{
+      source: {
         "id": "2",
         "name": "Bloomberg"
       },
@@ -89,15 +87,25 @@ const App = () => {
       publishedAt: "2024-01-10T18:00:00Z",
       content: "The film has grossed over $500 million globally within its first three days, setting a new benchmark for the industry... [+1600 chars]"
     }
-  ];
+  ], []);
+
+  const [activeCategory, setActiveCategory] = useState('General');
+  const [filteredArticles, setFilteredArticles] = useState(articles);
+
+  useEffect(() => {
+    const filtered = articles.filter(article =>
+      article.category.includes(activeCategory)
+    );
+    setFilteredArticles(filtered);
+  }, [activeCategory, articles]);
 
   const handleCategoryChange = (category) => {
     setActiveCategory(category);
   };
 
-  const filteredArticles = articles.filter(article =>
-    article.category.includes(activeCategory)
-  );
+  // const filteredArticles = articles.filter(article =>
+  //   article.category.includes(activeCategory)
+  // );
 
   return (
     <div className="App">
@@ -111,7 +119,11 @@ const App = () => {
       
       {/* Search filter to filter news articles based on search criteria */}
       <div className="search-filter">
-        <NewsSearchFilter />
+        <NewsSearchFilter 
+          articles={articles}
+          activeCategory={activeCategory}
+          onFilteredResults={(results) => setFilteredArticles(results)}
+        />
       </div>
 
       {/* Placeholder for development in progress 🙂 */}
