@@ -86,7 +86,127 @@ const App = () => {
       urlToImage: require('../src/assets/images/test-article-thumbnail.png'),
       publishedAt: "2024-01-10T18:00:00Z",
       content: "The film has grossed over $500 million globally within its first three days, setting a new benchmark for the industry... [+1600 chars]"
-    }
+    },
+    {
+      key: 6,
+      source: {
+        id: 6,
+        name: "Sky Sports"
+      },
+      title: "FIFA Introduces New Rules Ahead of World Cup",
+      author: "Mike Taylor",
+      category: ["General", "Sports"],
+      description: "FIFA announced sweeping rule changes to improve player safety and game fairness in the upcoming World Cup.",
+      url: "https://www.skysports.com/2024/01/10/fifa-new-rules-world-cup/",
+      urlToImage: "https://placehold.co/600x400",
+      publishedAt: "2024-01-10T16:00:00Z",
+      content: "The changes include stricter guidelines for head injuries and adjustments to penalty rules... [+1600 chars]"
+    },
+    {
+      key: 7,
+      source: {
+        id: 7,
+        name: "Bleacher Report"
+      },
+      title: "Tom Brady to Join NFL Broadcast Team",
+      author: "Samantha Green",
+      category: ["General", "Sports"],
+      description: "Legendary quarterback Tom Brady has signed a deal to become a sports commentator for the NFL.",
+      url: "https://www.bleacherreport.com/2024/01/11/tom-brady-joins-nfl-broadcast/",
+      urlToImage: "https://placehold.co/600x400",
+      publishedAt: "2024-01-11T19:30:00Z",
+      content: "The seven-time Super Bowl champion is set to bring his insights to the NFL commentary booth... [+1700 chars]"
+    },
+    {
+      key: 8,
+      source: {
+        id: 8,
+        name: "National Geographic"
+      },
+      title: "Scientists Discover Potentially Habitable Exoplanet",
+      author: "Emily Clark",
+      category: ["General", "Science"],
+      description: "Astronomers have identified a new exoplanet in the habitable zone of its star, sparking excitement about extraterrestrial life.",
+      url: "https://www.nationalgeographic.com/2024/01/10/scientists-discover-potentially-habitable-exoplanet/",
+      urlToImage: "https://placehold.co/600x400",
+      publishedAt: "2024-01-10T15:30:00Z",
+      content: "The newly discovered exoplanet orbits a star similar to our Sun and could potentially harbor life... [+2000 chars]"
+    },
+    {
+      key: 9,
+      source: {
+        id: 9,
+        name: "Science Daily"
+      },
+      title: "Breakthrough in Cancer Research Offers New Hope",
+      author: "Dr. Anthony Rose",
+      category: ["General", "Science"],
+      description: "Researchers have developed a new therapy that could revolutionize cancer treatment by targeting specific cells.",
+      url: "https://www.sciencedaily.com/2024/01/12/cancer-research-breakthrough/",
+      urlToImage: "https://placehold.co/600x400",
+      publishedAt: "2024-01-12T08:20:00Z",
+      content: "This innovative approach to cancer treatment focuses on personalized medicine... [+1900 chars]"
+    },
+    {
+      key: 10,
+      source: {
+        id: 10,
+        name: "BBC Science"
+      },
+      title: "AI Predicts Earthquake Locations with High Accuracy",
+      author: "Dr. Lucy Harper",
+      category: ["General", "Science"],
+      description: "A new AI model has achieved unprecedented accuracy in predicting earthquake-prone areas.",
+      url: "https://www.bbc.com/2024/01/11/ai-earthquake-prediction/",
+      urlToImage: "https://placehold.co/600x400",
+      publishedAt: "2024-01-11T14:10:00Z",
+      content: "The AI model uses seismic data to map potential earthquake hotspots globally... [+1750 chars]"
+    },
+    {
+      key: 11,
+      source: {
+        id: 11,
+        name: "Variety"
+      },
+      title: "Blockbuster Movie Shatters Box Office Records",
+      author: "Sarah Lee",
+      category: ["General", "Entertainment"],
+      description: "The latest action-packed movie has broken global box office records in its opening weekend.",
+      url: "https://www.variety.com/2024/01/10/blockbuster-movie-shatters-box-office-records/",
+      urlToImage: "https://placehold.co/600x400",
+      publishedAt: "2024-01-10T18:00:00Z",
+      content: "The film has grossed over $500 million globally within its first three days, setting a new benchmark for the industry... [+1600 chars]"
+    },
+    {
+      key: 12,
+      source: {
+        id: 12,
+        name: "Hollywood Reporter"
+      },
+      title: "Golden Globe Winners Announced",
+      author: "Michael Chan",
+      category: ["General", "Entertainment"],
+      description: "The Golden Globe Awards celebrated the year's best in television and film with surprise winners and heartfelt speeches.",
+      url: "https://www.hollywoodreporter.com/2024/01/10/golden-globe-winners-announced/",
+      urlToImage: "https://placehold.co/600x400",
+      publishedAt: "2024-01-10T20:00:00Z",
+      content: "The 2024 Golden Globe Awards delivered memorable moments, including unexpected wins in major categories... [+1800 chars]"
+    },
+    {
+      key: 13,
+      source: {
+        id: 13,
+        name: "Billboard"
+      },
+      title: "Chart-Topping Album Breaks Streaming Records",
+      author: "Anna Lopez",
+      category: ["General", "Entertainment"],
+      description: "The latest album by a global pop icon has broken multiple streaming records within a week of release.",
+      url: "https://www.billboard.com/2024/01/12/chart-topping-album-streaming-records/",
+      urlToImage: "https://placehold.co/600x400",
+      publishedAt: "2024-01-12T12:00:00Z",
+      content: "Fans have streamed the album over 500 million times in just seven days, setting a new record for the artist... [+1900 chars]"
+    },
   ], []);
 
   const [activeCategory, setActiveCategory] = useState('General');
