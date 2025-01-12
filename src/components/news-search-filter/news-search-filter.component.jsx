@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Search, ChevronDown } from 'lucide-react';
 import './news-search-filter.styles.css';
 
@@ -8,7 +8,14 @@ const NewsSearchFilter = ({
   activeCategory = 'General',
   onFilteredResults = () => { }
 }) => {
+
+  // For removing the search filter form when clicking outside of it
+  const filterRef = useRef(null);
+
+  // For toggling the search filter form
   const [isExpanded, setIsExpanded] = useState(false);
+
+  // Search filter form state
   const [searchParams, setSearchParams] = useState({
     exactPhrase: '',
     hasWords: '',
@@ -112,8 +119,21 @@ const NewsSearchFilter = ({
     });
   };
 
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (filterRef.current && !filterRef.current.contains(event.target)) {
+        setIsExpanded(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [isExpanded]);
+
   return (
-    <div className="search-filter__container">
+    <div className="search-filter__container" ref={filterRef} >
       <div className="search-filter__bar">
         <Search className="search-filter__icon" />
         <input
