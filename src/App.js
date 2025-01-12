@@ -81,7 +81,7 @@ const App = () => {
       },
       title: "Blockbuster Movie Shatters Box Office Records",
       author: "Sarah Lee",
-      category: ["Entertainment"],
+      category: ["Entertainment", "General"],
       description: "The latest action-packed movie has broken global box office records in its opening weekend.",
       url: "https://www.variety.com/2024/01/10/blockbuster-movie-shatters-box-office-records/",
       urlToImage: require('../src/assets/images/test-article-thumbnail.png'),
