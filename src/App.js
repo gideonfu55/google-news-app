@@ -207,6 +207,66 @@ const App = () => {
       publishedAt: "2024-09-12T12:00:00Z",
       content: "Fans have streamed the album over 500 million times in just seven days, setting a new record for the artist... [+1900 chars]"
     },
+    {
+      key: 14,
+      source: {
+        id: 14,
+        name: "Forbes"
+      },
+      title: "Stock Market Sees Major Gains Following Federal Reserve Announcement",
+      author: "Andrew White",
+      category: ["General", "Finance"],
+      description: "Markets reacted positively to the Federal Reserve's decision to keep interest rates steady, leading to a surge in stock prices.",
+      url: "https://www.forbes.com/2024/01/12/stock-market-gains-fed-announcement/",
+      urlToImage: "https://placehold.co/600x400",
+      publishedAt: "2025-01-12T08:30:00Z",
+      content: "The Federal Reserve's decision to maintain current interest rates has fueled optimism in financial markets... [+1800 chars]"
+    },
+    {
+      key: 15,
+      source: {
+        id: 15,
+        name: "Reuters"
+      },
+      title: "Oil Prices Climb Amid Supply Concerns",
+      author: "Rebecca Chang",
+      category: ["General", "Finance"],
+      description: "Crude oil prices rose sharply as OPEC signaled potential production cuts to address market oversupply.",
+      url: "https://www.reuters.com/2024/01/12/oil-prices-climb-supply-concerns/",
+      urlToImage: "https://placehold.co/600x400",
+      publishedAt: "2025-01-12T09:45:00Z",
+      content: "Oil prices saw a sharp increase today as OPEC hinted at production cuts to stabilize the market... [+1750 chars]"
+    },
+    {
+      key: 16,
+      source: {
+        id: 16,
+        name: "TechCrunch"
+      },
+      title: "AI Startups Attract Record Funding in 2025",
+      author: "Linda Parker",
+      category: ["General", "Technology"],
+      description: "Artificial intelligence startups have raised over $10 billion in funding this month alone, signaling strong investor interest in the field.",
+      url: "https://www.techcrunch.com/2024/01/12/ai-startups-record-funding/",
+      urlToImage: "https://placehold.co/600x400",
+      publishedAt: "2025-01-12T10:15:00Z",
+      content: "Investors continue to pour billions into artificial intelligence startups, with the sector seeing unprecedented growth... [+1900 chars]"
+    },
+    {
+      key: 17,
+      source: {
+        id: 17,
+        name: "The Verge"
+      },
+      title: "Apple Unveils Groundbreaking AR Glasses",
+      author: "James Carter",
+      category: ["General", "Technology"],
+      description: "Apple's new AR glasses promise to revolutionize how we interact with technology, featuring immersive experiences and advanced AI integration.",
+      url: "https://www.theverge.com/2024/01/12/apple-unveils-ar-glasses/",
+      urlToImage: "https://placehold.co/600x400",
+      publishedAt: "2025-01-12T11:00:00Z",
+      content: "Apple has officially announced its much-anticipated augmented reality glasses, offering cutting-edge features... [+2000 chars]"
+    },
   ], []);
 
   const [activeCategory, setActiveCategory] = useState('General');
