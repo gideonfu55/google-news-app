@@ -2,8 +2,8 @@
 // API Service for making calls to News API for fetching news feeds & articles for application
 
 const NewsAPI = require('newsapi');
-const API_KEY = ""; // Not placing it in properties for now - pls use with caution!
-const newsapiInstance = new NewsAPI(API_KEY);
+const API_KEY = 'a0eea1f1d9ae4758b3c5c83ec27a9a5e'; // Not placing it in properties for now - pls use with caution!
+const newsapiInstance = new NewsAPI("a0eea1f1d9ae4758b3c5c83ec27a9a5e");
 
 // Get all top news headlines - type > array
 const fetchAllNewsHeadlines = async () => {
@@ -13,15 +13,18 @@ const fetchAllNewsHeadlines = async () => {
             sortBy: 'relevancy',
         })
 
+        console.log(response);
+
         if (response.status === 'ok') {
             console.log('All news headlines fetched successfully');
+            return response.articles;
         }
 
-        return response.articles;
+        throw new Error('API response status was not ok');
     } catch {
         console.error('Error fetching all news headlines: ' + error);
         
-        return [];
+        throw error;
     }
 }
 

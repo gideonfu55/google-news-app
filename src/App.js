@@ -288,18 +288,15 @@ const App = () => {
     // Fetch news articles based on category
     const fetchData = async () => {
       setLoading(true);
+      
       try {
         // Fetch all required news categories concurrently
-        const [ entertainmentNewsData ] = await Promise.all([
-          // fetchAllNewsHeadlines(),
-          // fetchAllLocalNews(),
-          fetchNewsByCategory('entertainment'),
-        ]);
-
-        // Update state with fetched news data
-        setFilteredArticles(entertainmentNewsData);
+        const [ entertainmentNewsData ] = await fetchAllNewsHeadlines();
+        // setFilteredArticles(entertainmentNewsData);
+        console.log('Entertainment news data:', entertainmentNewsData);
       } catch (error) {
         console.error('Error fetching news data:', error);
+        setFilteredArticles([]);
       } finally {
         setLoading(false);
       }
