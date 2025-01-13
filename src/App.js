@@ -255,7 +255,7 @@ const App = () => {
   ], []);
 
   // Test News API data - entertainment articles
-  // const [entertainmentNews, setEntertainmentNews] = useState([]);
+  const [entertainmentNews, setEntertainmentNews] = useState([]);
   const [loading, setLoading] = useState(true);
 
   const [activeCategory, setActiveCategory] = useState('General');
@@ -270,18 +270,23 @@ const App = () => {
 
   // Effect to use for fetching news articles from News API - test for entertainment category
   useEffect(() => {
-    // Fetch news articles based on category
     const fetchData = async () => {
       setLoading(true);
       
       try {
-        // Fetch all required news categories concurrently
-        const [entertainmentNewsData] = await NewsApiService.fetchAllNewsHeadlines();
-        // setFilteredArticles(entertainmentNewsData);
-        console.log('Entertainment news data:', entertainmentNewsData);
+        // Fetch entertainment news articles from News API
+        const data = await NewsApiService.fetchAllNewsHeadlines();
+        const limitedArticles = data.slice(0, 10); // Limit to 10 articles for display
+        
+        if (Array.isArray(data)) {
+          setEntertainmentNews(limitedArticles); // Set articles array
+        } else {
+          console.error('Unexpected data structure:', data);
+          setEntertainmentNews([]);
+        }
       } catch (error) {
         console.error('Error fetching news data:', error);
-        setFilteredArticles([]);
+        setEntertainmentNews([]);
       } finally {
         setLoading(false);
       }
@@ -328,6 +333,9 @@ const App = () => {
 
         {/* News feed box to display list of news articles - multiple sections to be used */}
         <NewsFeedBox articles={ filteredArticles } />
+
+        {/* News feed box to display list of news articles - entertainment section */}
+        <NewsFeedBox articles={ entertainmentNews } />
 
       </header>
     </div>
