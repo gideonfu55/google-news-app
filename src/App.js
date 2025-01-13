@@ -1,6 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
-import { fetchNewsByCategory } from './services/apis/news-api-service.js';
+import NewsApiService from './services/apis/news-api-service';
 
 import { useEffect, useState, useMemo } from 'react';
 import CategoryTabs from './components/category-tabs/category-tabs.component';
@@ -80,7 +80,7 @@ const App = () => {
       },
       title: "Blockbuster Movie Shatters Box Office Records",
       author: "Sarah Lee",
-      category: ["General", "Entertainment"],
+      category: ["General"],
       description: "The latest action-packed movie has broken global box office records in its opening weekend.",
       url: "https://www.variety.com/2024/01/10/blockbuster-movie-shatters-box-office-records/",
       urlToImage: require('../src/assets/images/test-article-thumbnail.png'),
@@ -166,26 +166,11 @@ const App = () => {
       key: 11,
       source: {
         id: 11,
-        name: "Variety"
-      },
-      title: "Blockbuster Movie Shatters Box Office Records",
-      author: "Sarah Lee",
-      category: ["General", "Entertainment"],
-      description: "The latest action-packed movie has broken global box office records in its opening weekend.",
-      url: "https://www.variety.com/2024/01/10/blockbuster-movie-shatters-box-office-records/",
-      urlToImage: "https://placehold.co/600x400",
-      publishedAt: "2024-12-10T18:00:00Z",
-      content: "The film has grossed over $500 million globally within its first three days, setting a new benchmark for the industry... [+1600 chars]"
-    },
-    {
-      key: 12,
-      source: {
-        id: 12,
         name: "Hollywood Reporter"
       },
       title: "Golden Globe Winners Announced",
       author: "Michael Chan",
-      category: ["General", "Entertainment"],
+      category: ["General"],
       description: "The Golden Globe Awards celebrated the year's best in television and film with surprise winners and heartfelt speeches.",
       url: "https://www.hollywoodreporter.com/2024/01/10/golden-globe-winners-announced/",
       urlToImage: "https://placehold.co/600x400",
@@ -193,14 +178,14 @@ const App = () => {
       content: "The 2024 Golden Globe Awards delivered memorable moments, including unexpected wins in major categories... [+1800 chars]"
     },
     {
-      key: 13,
+      key: 12,
       source: {
-        id: 13,
+        id: 12,
         name: "Billboard"
       },
       title: "Chart-Topping Album Breaks Streaming Records",
       author: "Anna Lopez",
-      category: ["General", "Entertainment"],
+      category: ["General"],
       description: "The latest album by a global pop icon has broken multiple streaming records within a week of release.",
       url: "https://www.billboard.com/2024/01/12/chart-topping-album-streaming-records/",
       urlToImage: "https://placehold.co/600x400",
@@ -208,9 +193,9 @@ const App = () => {
       content: "Fans have streamed the album over 500 million times in just seven days, setting a new record for the artist... [+1900 chars]"
     },
     {
-      key: 14,
+      key: 13,
       source: {
-        id: 14,
+        id: 13,
         name: "Forbes"
       },
       title: "Stock Market Sees Major Gains Following Federal Reserve Announcement",
@@ -223,9 +208,9 @@ const App = () => {
       content: "The Federal Reserve's decision to maintain current interest rates has fueled optimism in financial markets... [+1800 chars]"
     },
     {
-      key: 15,
+      key: 14,
       source: {
-        id: 15,
+        id: 14,
         name: "Reuters"
       },
       title: "Oil Prices Climb Amid Supply Concerns",
@@ -238,9 +223,9 @@ const App = () => {
       content: "Oil prices saw a sharp increase today as OPEC hinted at production cuts to stabilize the market... [+1750 chars]"
     },
     {
-      key: 16,
+      key: 15,
       source: {
-        id: 16,
+        id: 15,
         name: "TechCrunch"
       },
       title: "AI Startups Attract Record Funding in 2025",
@@ -253,9 +238,9 @@ const App = () => {
       content: "Investors continue to pour billions into artificial intelligence startups, with the sector seeing unprecedented growth... [+1900 chars]"
     },
     {
-      key: 17,
+      key: 16,
       source: {
-        id: 17,
+        id: 16,
         name: "The Verge"
       },
       title: "Apple Unveils Groundbreaking AR Glasses",
@@ -266,7 +251,7 @@ const App = () => {
       urlToImage: "https://placehold.co/600x400",
       publishedAt: "2025-01-12T11:00:00Z",
       content: "Apple has officially announced its much-anticipated augmented reality glasses, offering cutting-edge features... [+2000 chars]"
-    },
+    }
   ], []);
 
   // Test News API data - entertainment articles
@@ -291,7 +276,7 @@ const App = () => {
       
       try {
         // Fetch all required news categories concurrently
-        const [ entertainmentNewsData ] = await fetchAllNewsHeadlines();
+        const [entertainmentNewsData] = await NewsApiService.fetchAllNewsHeadlines();
         // setFilteredArticles(entertainmentNewsData);
         console.log('Entertainment news data:', entertainmentNewsData);
       } catch (error) {
