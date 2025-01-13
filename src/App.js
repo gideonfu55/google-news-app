@@ -2,11 +2,11 @@ import logo from './logo.svg';
 import './App.css';
 import NewsApiService from './services/apis/news-api-service';
 
+import { BrowserRouter as Router } from 'react-router-dom';
 import { useEffect, useState, useMemo } from 'react';
-import CategoryTabs from './components/category-tabs/category-tabs.component';
 import NewsFeedBox from './components/news-feed-box/news-feed-box.component';
 import NewsSearchFilter from './components/news-search-filter/news-search-filter.component';
-
+import NavigationBar from './routes/navigation/navigation-bar.component';
 
 const App = () => {
   
@@ -258,7 +258,11 @@ const App = () => {
   const [entertainmentNews, setEntertainmentNews] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  const [activeCategory, setActiveCategory] = useState('General');
+  const [
+    activeCategory, 
+    // setActiveCategory
+  ] 
+    = useState('General');
   const [filteredArticles, setFilteredArticles] = useState(articles);
 
   useEffect(() => {
@@ -299,46 +303,40 @@ const App = () => {
     return <div>Loading...</div>;
   }
 
-  const handleCategoryChange = (category) => {
-    setActiveCategory(category);
-  };
-
   return (
-    <div className="App">
-      {/* Tab where list of news feeds can be retrieved based on categories */}
-      <CategoryTabs 
-        activeCategory={activeCategory}
-        onCategoryChange={handleCategoryChange}
-      />
+    <Router>
+      <div className="App">
+        {/* Navigation bar for the app */}
+        <NavigationBar />
 
-      <br />
-      
-      {/* Search filter to filter news articles based on search criteria */}
-      <div className="search-filter">
-        <NewsSearchFilter 
-          articles={articles}
-          activeCategory={activeCategory}
-          onFilteredResults={(results) => setFilteredArticles(results)}
-        />
-      </div>
-
-      {/* Placeholder for development in progress 🙂 */}
-      <header className="App-header">
-        <div style={{ display: 'flex', flexDirection:'column', textAlign: 'center', alignItems: 'center' }}>
-          <img src={logo} className="App-logo" alt="logo" />
+        {/* Search filter to filter news articles based on search criteria */}
+        <br />
+        <div className="search-filter">
+          <NewsSearchFilter
+            articles={articles}
+            activeCategory={activeCategory}
+            onFilteredResults={(results) => setFilteredArticles(results)}
+          />
         </div>
-        <p style={{ textAlign: 'center', fontWeight: 'bold' }}>
-          Google News App - Coming Soon
-        </p>
+        
+        {/* Placeholder for development in progress 🙂 */}
+        <header className="App-header">
+          <div style={{ display: 'flex', flexDirection:'column', textAlign: 'center', alignItems: 'center' }}>
+            <img src={logo} className="App-logo" alt="logo" />
+          </div>
+          <p style={{ textAlign: 'center', fontWeight: 'bold' }}>
+            Google News App - Coming Soon
+          </p>
 
-        {/* News feed box to display list of news articles - multiple sections to be used */}
-        <NewsFeedBox articles={ filteredArticles } />
+          {/* News feed box to display list of news articles - multiple sections to be used */}
+          <NewsFeedBox articles={ filteredArticles } />
 
-        {/* News feed box to display list of news articles - entertainment section */}
-        <NewsFeedBox articles={ entertainmentNews } />
+          {/* News feed box to display list of news articles - entertainment section */}
+          <NewsFeedBox articles={ entertainmentNews } />
 
-      </header>
-    </div>
+        </header>
+      </div>
+    </Router>
   );
 }
 
