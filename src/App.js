@@ -282,10 +282,6 @@ const App = () => {
     setActiveCategory(category);
   };
 
-  // const filteredArticles = articles.filter(article =>
-  //   article.category.includes(activeCategory)
-  // );
-
   return (
     <div className="App">
       {/* Tab where list of news feeds can be retrieved based on categories */}
