@@ -10,10 +10,21 @@ import NavigationBar from './routes/navigation/navigation-bar.component';
 
 const App = () => {
   
+  const categories = [
+    "headlines",
+    "business",
+    "technology",
+    "science",
+    "health",
+    "sports",
+    "entertainment",
+  ];
+
   const [articles, setArticles] = useState([]);
   const [categoryArticles, setCategoryArticles] = useState({});
   const [searchResults, setSearchResults] = useState([]);
   const [loading, setLoading] = useState(true);
+
 
   // Fetch articles for a specific category
   const fetchCategoryArticles = useCallback(async (category) => {
@@ -25,9 +36,7 @@ const App = () => {
 
     try {
       let fetchedArticles;
-      if (category === 'local') {
-        fetchedArticles = await NewsApiService.fetchAllLocalNews();
-      } else if (category === 'headlines') {
+      if (category === 'headlines') {
         fetchedArticles = await NewsApiService.fetchAllNewsHeadlines();
       } else {
         fetchedArticles = await NewsApiService.fetchNewsByCategory(category);
@@ -93,76 +102,19 @@ const App = () => {
       </div>
 
       <Routes>
-        <Route
-          path="/headlines"
-          element={
-            <NewsCategoryRoute
-              category="headlines"
-              articles={categoryArticles.headlines || []}
-              fetchCategoryArticles={fetchCategoryArticles}
-            />
-          }
-        />
-        <Route
-          path="/business"
-          element={
-            <NewsCategoryRoute
-              category="business"
-              articles={categoryArticles.business || []}
-              fetchCategoryArticles={fetchCategoryArticles}
-            />
-          }
-        />
-        <Route
-          path="/technology"
-          element={
-            <NewsCategoryRoute
-              category="technology"
-              articles={categoryArticles.technology || []}
-              fetchCategoryArticles={fetchCategoryArticles}
-            />
-          }
-        />
-        <Route
-          path="/science"
-          element={
-            <NewsCategoryRoute
-              category="science"
-              articles={categoryArticles.science || []}
-              fetchCategoryArticles={fetchCategoryArticles}
-            />
-          }
-        />
-        <Route
-          path="/health"
-          element={
-            <NewsCategoryRoute
-              category="health"
-              articles={categoryArticles.health || []}
-              fetchCategoryArticles={fetchCategoryArticles}
-            />
-          }
-        />
-        <Route
-          path="/sports"
-          element={
-            <NewsCategoryRoute
-              category="sports"
-              articles={categoryArticles.sports || []}
-              fetchCategoryArticles={fetchCategoryArticles}
-            />
-          }
-        />
-        <Route
-          path="/entertainment"
-          element={
-            <NewsCategoryRoute
-              category="entertainment"
-              articles={categoryArticles.entertainment || []}
-              fetchCategoryArticles={fetchCategoryArticles}
-            />
-          }
-        />
+        {categories.map((category) => (
+          <Route
+            key={category}
+            path={`/${category}`}
+            element={
+              <NewsCategoryRoute
+                category={category}
+                articles={categoryArticles[category] || []}
+                fetchCategoryArticles={fetchCategoryArticles}
+              />
+            }
+          />
+        ))}
         <Route path="/" element={<NewsFeedBox articles={searchResults} />} />
       </Routes>
     </Router>
