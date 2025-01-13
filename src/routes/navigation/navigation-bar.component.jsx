@@ -5,10 +5,10 @@ import logo from '../../assets/images/google_news_logo.png';
 const NavigationBar = () => {
   const categories = [
     { id: 'headlines', label: 'Headlines' },
-    { id: 'local', label: 'Local' },
+    { id: 'business', label: 'Business' },
     { id: 'technology', label: 'Technology' },
-    { id: 'finance', label: 'Finance' },
     { id: 'science', label: 'Science' },
+    { id: 'health', label: 'Health' },
     { id: 'sports', label: 'Sports' },
     { id: 'entertainment', label: 'Entertainment' },
   ];

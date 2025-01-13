@@ -10,7 +10,7 @@ const NewsApiService = {
     // Fetch all top news headlines
     fetchAllNewsHeadlines: async () => {
         try {
-            const response = await fetch(`${BASE_URL}/top-headlines?language=en&sortBy=relevancy&pageSize=10&apiKey=${API_KEY}`);
+            const response = await fetch(`${BASE_URL}/top-headlines?language=en&sortBy=relevancy&pageSize=5&apiKey=${API_KEY}`);
             const data = await response.json();
 
             if (data.status === 'ok') {
@@ -30,7 +30,7 @@ const NewsApiService = {
     fetchAllLocalNews: async () => {
         try {
             const response = await fetch(
-                `${BASE_URL}/top-headlines?language=en&country=sg&sortBy=relevancy&pageSize=10&apiKey=${API_KEY}`
+                `${BASE_URL}/top-headlines?country=sg&language=en&sortBy=relevancy&pageSize=5&apikey=${API_KEY}`
             );
             const data = await response.json();
 
@@ -50,7 +50,7 @@ const NewsApiService = {
     fetchNewsByCategory: async (category) => {
         try {
             const response = await fetch(
-                `${BASE_URL}/top-headlines?category=${category}&language=en&pageSize=10&apiKey=${API_KEY}`
+                `${BASE_URL}/top-headlines?category=${category}&language=en&pageSize=5&apiKey=${API_KEY}`
             );
             const data = await response.json();
 

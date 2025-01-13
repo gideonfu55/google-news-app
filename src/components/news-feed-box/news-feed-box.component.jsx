@@ -14,7 +14,7 @@ const NewsFeedBox = ({ articles }) => {
         {/* Show "no results" message on top of articles if no articles are found */}
         {articles.length === 0 ? (
           <div className="news-feed__no-results">
-            There are no items to show.
+            No articles available for this category.
           </div>
         ) : (
           articles.map((article, index) => (
