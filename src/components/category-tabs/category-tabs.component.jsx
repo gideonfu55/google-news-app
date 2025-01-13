@@ -8,6 +8,7 @@ const CategoryTabs = ({ activeCategory, onCategoryChange }) => {
     { id: 'Technology', label: 'Technology' },
     { id: 'Sports', label: 'Sports' },
     { id: 'Science', label: 'Science' },
+    { id: 'Entertainment', label: 'Entertainment' }
   ];
 
   return (

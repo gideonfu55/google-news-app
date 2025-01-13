@@ -1,5 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
+import { fetchNewsByCategory } from './services/apis/news-api-service.js';
 
 import { useEffect, useState, useMemo } from 'react';
 import CategoryTabs from './components/category-tabs/category-tabs.component';
@@ -268,6 +269,10 @@ const App = () => {
     },
   ], []);
 
+  // Test News API data - entertainment articles
+  // const [entertainmentNews, setEntertainmentNews] = useState([]);
+  const [loading, setLoading] = useState(true);
+
   const [activeCategory, setActiveCategory] = useState('General');
   const [filteredArticles, setFilteredArticles] = useState(articles);
 
@@ -277,6 +282,35 @@ const App = () => {
     );
     setFilteredArticles(filtered);
   }, [activeCategory, articles]);
+
+  // Effect to use for fetching news articles from News API - test for entertainment category
+  useEffect(() => {
+    // Fetch news articles based on category
+    const fetchData = async () => {
+      setLoading(true);
+      try {
+        // Fetch all required news categories concurrently
+        const [ entertainmentNewsData ] = await Promise.all([
+          // fetchAllNewsHeadlines(),
+          // fetchAllLocalNews(),
+          fetchNewsByCategory('entertainment'),
+        ]);
+
+        // Update state with fetched news data
+        setFilteredArticles(entertainmentNewsData);
+      } catch (error) {
+        console.error('Error fetching news data:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
 
   const handleCategoryChange = (category) => {
     setActiveCategory(category);
