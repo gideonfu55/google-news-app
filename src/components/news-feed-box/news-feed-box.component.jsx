@@ -2,6 +2,12 @@ import NewsItem from '../news-item/news-item.component'
 import './new-feed-box.style.css'
 
 const NewsFeedBox = ({ articles }) => {
+
+  if (!Array.isArray(articles)) {
+    console.error('Articles are not in array: ', articles);
+    return <div>Unable to load news articles.</div>;
+  }
+
   return (
     <div className="news-feed">
       <div className="news-feed__content">
