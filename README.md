@@ -4,7 +4,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ### `npm install`
 
-Please run this command before launching the application with `npm start`
+Please run this command to install application dependencies first before launching the application with `npm start`
 
 ## Available Scripts
 
