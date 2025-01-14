@@ -1,7 +1,10 @@
+import { v4 as uuidv4 } from 'uuid';
 import NewsItem from '../news-item/news-item.component'
 import './new-feed-box.style.css'
 
 const NewsFeedBox = ({ articles }) => {
+
+  console.log('Rendering NewsFeedBox with articles:', articles);
 
   if (!Array.isArray(articles)) {
     console.error('Articles are not in array: ', articles);
@@ -17,8 +20,8 @@ const NewsFeedBox = ({ articles }) => {
             No articles available for this category.
           </div>
         ) : (
-          articles.map((article, index) => (
-            <NewsItem key={index} article={article} />
+          articles.map((article) => (
+            <NewsItem key={uuidv4()} article={article} />
           )))
         }
       </div>

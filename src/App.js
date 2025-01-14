@@ -2,6 +2,7 @@ import logo from './logo.svg';
 import './App.css';
 
 import { categories } from './constants/constants';
+import { v4 as uuidv4 } from 'uuid';
 
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
@@ -30,6 +31,8 @@ const App = () => {
     );
   }
 
+  console.log('Rendering App with searchResults:', searchResults);
+
   return (
     <Router>
         {/* Navigation bar to display categories and logo */}
@@ -40,7 +43,10 @@ const App = () => {
         <div className="search-filter">
           <NewsSearchFilter
             articles={articles}
-            onFilteredResults={(filtered) => setSearchResults(filtered)}
+            onFilteredResults={(filtered) => {
+              console.log('Updating Search Results State:', filtered);
+              setSearchResults(filtered)}
+            }
           />
         </div>
         
@@ -62,7 +68,7 @@ const App = () => {
 
         {categories.map((category) => (
           <Route
-            key={category}
+            key={uuidv4()}
             path={`/${category}`}
             element={
               <NewsCategoryRoute
@@ -75,7 +81,16 @@ const App = () => {
         ))}
         
         {/* Default route to display search results */}
-        <Route path="/" element={<NewsFeedBox articles={searchResults} />} />
+        <Route
+          path="/"
+          element={
+            searchResults.length > 0 ? (
+              <NewsFeedBox articles={searchResults} />
+            ) : (
+              <HomePage /> // Default to HomePage if no search results
+            )
+          }
+        />
 
       </Routes>
     </Router>

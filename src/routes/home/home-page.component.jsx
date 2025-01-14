@@ -8,7 +8,7 @@ import CircleLoaderWidget from '../../widgets/circle-loader.widget';
 const HomePage = () => {
 
   const [topStories, setTopStories] = useState([]);
-  const [worldNews, setWorldNews] = useState([]);
+  const [scienceNews, setScienceNews] = useState([]);
   const [picksForYou, setPicksForYou] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -23,7 +23,7 @@ const HomePage = () => {
         ]);
 
         setTopStories(fetchedTopStories);
-        setWorldNews(fetchedScience);
+        setScienceNews(fetchedScience);
         setPicksForYou(fetchedPicks);
       } catch (error) {
         console.error('Error fetching articles:', error);
@@ -41,6 +41,8 @@ const HomePage = () => {
     );
   }
 
+  console.log('Rendering HomePage with predefined articles');
+
   return (
     <div className="home-container">
       {/* Left Section */}
@@ -52,7 +54,7 @@ const HomePage = () => {
 
         <section className="news-section">
           <h2 className="section-title">Science News</h2>
-          <NewsFeedBox articles={worldNews} />
+          <NewsFeedBox articles={scienceNews} />
         </section>
       </div>
 

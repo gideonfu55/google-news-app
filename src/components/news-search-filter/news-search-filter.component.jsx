@@ -43,7 +43,7 @@ const NewsSearchFilter = ({ onFilteredResults = () => {} }) => {
 
   // Validation for search filter form - search valid if exact phrase or has words are present
   const isSearchValid = () => {
-    const hasSearchTerms = searchParams.exactPhrase || searchParams.hasWords;
+    const hasSearchTerms = searchParams.exactPhrase || searchParams.hasWords || searchParams.website;
     return hasSearchTerms;
   };
 
