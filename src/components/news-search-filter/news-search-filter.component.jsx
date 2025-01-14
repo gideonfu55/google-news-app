@@ -41,6 +41,12 @@ const NewsSearchFilter = ({ onFilteredResults = () => {} }) => {
     return now.toISOString().split('T')[0];
   };
 
+  // Validation for search filter form - search valid if exact phrase or has words are present
+  const isSearchValid = () => {
+    const hasSearchTerms = searchParams.exactPhrase || searchParams.hasWords;
+    return hasSearchTerms;
+  };
+
   const [isExpanded, setIsExpanded] = useState(false);
   const [loading, setLoading] = useState(false);
 
@@ -68,6 +74,9 @@ const NewsSearchFilter = ({ onFilteredResults = () => {} }) => {
    */
   const handleSearch = async (e) => {
     e.preventDefault();
+    if (!isSearchValid()) {
+      return;
+    }
     setLoading(true);
 
     try {
@@ -247,11 +256,18 @@ const NewsSearchFilter = ({ onFilteredResults = () => {} }) => {
           </div>
 
           <div className="search-filter__actions">
-            <button className='search-filter__clear' type="button" onClick={handleClear}>
+            <button 
+              className='search-filter__clear' 
+              type="button" 
+              onClick={handleClear}>
               Clear
             </button>
-            <button className='search-filter__submit' type="submit" disabled={loading}>
-              {loading ? 'Searching...' : 'Search'}
+            <button 
+              className="search-filter__submit"
+              type="submit" 
+              disabled={ loading || !isSearchValid() }
+            >
+              { loading ? 'Searching...' : 'Search' }
             </button>
           </div>
         </form>
