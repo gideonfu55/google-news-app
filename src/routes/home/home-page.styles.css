@@ -4,6 +4,8 @@
   grid-template-columns: 2fr 1fr; /* Left section takes 2x space compared to right */
   gap: 16px;
   padding: 16px;
+  width: 80%; /* Shrink the main content to 80% of the page width */
+  margin: 0 auto; /* Center the container */
   background-color: #f8f9fa; /* Light background for the page */
 }
 
@@ -51,6 +53,8 @@
 @media (max-width: 768px) {
   .home-container {
     grid-template-columns: 1fr; /* Stack sections vertically on small screens */
+    width: 100%; /* Use full width on smaller screens */
+    padding: 8px;
   }
 
   .home-main, .home-sidebar {
