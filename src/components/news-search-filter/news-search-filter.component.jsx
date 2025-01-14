@@ -211,10 +211,10 @@ const NewsSearchFilter = ({ onFilteredResults = () => {} }) => {
           </div>
 
           <div className="search-filter__actions">
-            <button type="button" onClick={handleClear}>
+            <button className='search-filter__clear' type="button" onClick={handleClear}>
               Clear
             </button>
-            <button type="submit" disabled={loading}>
+            <button className='search-filter__submit' type="submit" disabled={loading}>
               {loading ? 'Searching...' : 'Search'}
             </button>
           </div>
