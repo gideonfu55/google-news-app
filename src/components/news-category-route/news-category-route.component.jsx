@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import NewsFeedBox from '../news-feed-box/news-feed-box.component';
 
 const NewsCategoryRoute = ({ category, articles, fetchCategoryArticles }) => {
