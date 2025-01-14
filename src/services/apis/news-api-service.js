@@ -70,7 +70,7 @@ const NewsApiService = {
     searchArticles: async (query) => {
         try {
           const response = await fetch(
-            `${BASE_URL}/everything?q=${encodeURIComponent(query)}&language=en&pageSize=5&apiKey=${API_KEY}`
+            `${BASE_URL}/everything?q=${encodeURIComponent(query)}&language=en&pageSize=2&apiKey=${API_KEY}`
           );
         //   console.log('search url:', `${BASE_URL}/everything?q=${encodeURIComponent(query)}&language=en&pageSize=5&apiKey=${API_KEY}`);
           

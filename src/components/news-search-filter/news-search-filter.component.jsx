@@ -131,7 +131,7 @@ const NewsSearchFilter = ({ onFilteredResults = () => {} }) => {
           placeholder="Search articles based on title and description"
           className="search-filter__input"
           value={searchParams.exactPhrase}
-          name="hasWords"
+          name="exactPhrase"
           onChange={handleInputChange}
           onKeyDown={handleKeyDown}
         />
