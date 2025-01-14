@@ -55,6 +55,8 @@ const NewsSearchFilter = ({ onFilteredResults = () => {} }) => {
     try {
       // Build the query from search parameters
       const queryParts = [];
+      var domains = '';
+
       if (searchParams.exactPhrase) {
         queryParts.push(`"${searchParams.exactPhrase}"`);
       }
@@ -69,15 +71,15 @@ const NewsSearchFilter = ({ onFilteredResults = () => {} }) => {
         queryParts.push(excludedWords);
       }
 
-      // Add website domain to search query
-      if (searchParams.website) {
-        queryParts.push(`domains=${searchParams.website}`);
-      }
-
       const query = queryParts.join(' ');
 
+      // Add website domain to search query
+      if (searchParams.website) {
+        domains = 'domains=' + searchParams.website + '&';
+      }
+
       // Fetch articles from API
-      const fetchedResults = await NewsApiService.searchArticles(query);
+      const fetchedResults = await NewsApiService.searchArticles(domains, query);
       onFilteredResults(fetchedResults); // Pass results to parent component
     } catch (error) {
       console.error('Error fetching search results:', error);
