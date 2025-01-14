@@ -2,7 +2,7 @@
 
 // API Service for making calls to News API for fetching news feeds & articles for application
 
-const API_KEY = '43e1a3a1a8934c738b394b92e1ea184d'; // to use environment variables for production
+const API_KEY = '03b79ecbc3cf4526971b38a3b7671f07'; // to use environment variables for production
 const BASE_URL = 'https://newsapi.org/v2';
 
 const NewsApiService = {

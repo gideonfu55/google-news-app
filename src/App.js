@@ -10,6 +10,7 @@ import NewsFeedBox from './components/news-feed-box/news-feed-box.component';
 import NewsSearchFilter from './components/news-search-filter/news-search-filter.component';
 import NavigationBar from './routes/navigation/navigation-bar.component';
 import NewsCategoryRoute from './components/news-category-route/news-category-route.component';
+import HomePage from './routes/home/home-page.component';
 
 const App = () => {
 
@@ -47,13 +48,15 @@ const App = () => {
               <img src={logo} className="App-logo" alt="logo" />
             </div>
             <p style={{ textAlign: 'center', fontWeight: 'bold' }}>
-              Google News App - Coming Soon
+              Google News App - Almost there! 🚀
             </p>
           </header>
         </div>
 
       {/* Routes for navigating to different categories of articles based on navigation-bar */}
       <Routes>
+        <Route path="/home" element={<HomePage />} />
+
         {categories.map((category) => (
           <Route
             key={category}
@@ -67,7 +70,10 @@ const App = () => {
             }
           />
         ))}
+        
+        {/* Default route to display search results */}
         <Route path="/" element={<NewsFeedBox articles={searchResults} />} />
+
       </Routes>
     </Router>
   );

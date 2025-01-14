@@ -1,0 +1,59 @@
+/* Main container for the homepage */
+.home-container {
+  display: grid;
+  grid-template-columns: 2fr 1fr; /* Left section takes 2x space compared to right */
+  gap: 16px;
+  padding: 16px;
+  background-color: #f8f9fa; /* Light background for the page */
+}
+
+/* Left section (main content) */
+.home-main {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Right section (sidebar) */
+.home-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* News section container */
+.news-section {
+  background: #ffffff; /* White background for each box */
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for card effect */
+  padding: 16px;
+}
+
+/* Section title */
+.section-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 12px;
+  color: #202124; /* Slightly darker grey for titles */
+}
+
+/* Individual news items */
+.news-feed-box .news-item {
+  padding: 8px 0;
+  border-bottom: 1px solid #e0e0e0; /* Divider between news items */
+}
+
+.news-feed-box .news-item:last-child {
+  border-bottom: none; /* Remove border for the last item */
+}
+
+/* Responsive design for smaller screens */
+@media (max-width: 768px) {
+  .home-container {
+    grid-template-columns: 1fr; /* Stack sections vertically on small screens */
+  }
+
+  .home-main, .home-sidebar {
+    gap: 8px;
+  }
+}

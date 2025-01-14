@@ -18,13 +18,22 @@
   display: inline-block;
 }
 
+/* Home Navigation link - bring to far left */
+.navigation-bar__homenav {
+  padding-left: 20px;
+  margin-right: auto;
+  text-decoration: none;
+  color: #858585;
+}
+
 /* Navigation links container */
 .navigation-bar__nav {
   display: flex;
   gap: 20px;
-  justify-content: center;
+  margin-left: 450px;
   align-items: center;
-  flex-grow: 1;
+  /* justify-content: center; */
+  /* flex-grow: 0.8; */
 }
 
 /* Navigation link styles */

@@ -3,6 +3,9 @@ import './navigation-bar.styles.css';
 import logo from '../../assets/images/google_news_logo.png';
 
 const NavigationBar = () => {
+
+  const home = { id: 'home', label: 'Home' };
+
   const categories = [
     { id: 'headlines', label: 'Headlines' },
     { id: 'business', label: 'Business' },
@@ -14,10 +17,16 @@ const NavigationBar = () => {
   ];
 
   return (
+    // Navigation bar to display categories and logo
     <div className="navigation-bar">
       <div className="navigation-bar__logo-container">
         <NavLink to="/" className="navigation-bar__logo">
           <img src={logo} alt="GoogleNews Logo" />
+        </NavLink>
+      </div>
+      <div className="navigation-bar__homenav-container">
+        <NavLink to="/home" className="navigation-bar__homenav">
+          {home.label}
         </NavLink>
       </div>
       <nav className="navigation-bar__nav">
