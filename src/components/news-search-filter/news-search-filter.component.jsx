@@ -22,6 +22,25 @@ const NewsSearchFilter = ({ onFilteredResults = () => {} }) => {
     dateRange: 'any'
   });
 
+  // Date conversion helper function
+  const getDateFromRange = (range) => {
+    const now = new Date();
+    switch (range) {
+      case 'hour':
+        now.setHours(now.getHours() - 1);
+        break;
+      case 'day':
+        now.setDate(now.getDate() - 1);
+        break;
+      case 'week':
+        now.setDate(now.getDate() - 7);
+        break;
+      default:
+        return null;
+    }
+    return now.toISOString().split('T')[0];
+  };
+
   const [isExpanded, setIsExpanded] = useState(false);
   const [loading, setLoading] = useState(false);
 
@@ -33,7 +52,6 @@ const NewsSearchFilter = ({ onFilteredResults = () => {} }) => {
     { value: 'hour', label: 'Past hour' },
     { value: 'day', label: 'Past 24 hours' },
     { value: 'week', label: 'Past week' },
-    { value: 'year', label: 'Past year' }
   ];
 
   const handleInputChange = (e) => {
@@ -54,8 +72,9 @@ const NewsSearchFilter = ({ onFilteredResults = () => {} }) => {
 
     try {
       // Build the query from search parameters
-      const queryParts = [];
-      var domains = '';
+      let queryParts = [];
+      let domains = '';
+      let fromDate = '';
 
       if (searchParams.exactPhrase) {
         queryParts.push(`"${searchParams.exactPhrase}"`);
@@ -71,15 +90,23 @@ const NewsSearchFilter = ({ onFilteredResults = () => {} }) => {
         queryParts.push(excludedWords);
       }
 
-      const query = queryParts.join(' ');
-
       // Add website domain to search query
       if (searchParams.website) {
         domains = 'domains=' + searchParams.website + '&';
       }
 
+      // Add date range to search query
+      if (searchParams.dateRange !== 'any') {
+        const date = getDateFromRange(searchParams.dateRange);
+        if (date) {
+          fromDate = `from=${date}&`;
+        }
+      }
+
+      const query = queryParts.join(' ');
+
       // Fetch articles from API
-      const fetchedResults = await NewsApiService.searchArticles(domains, query);
+      const fetchedResults = await NewsApiService.searchArticles(domains, query, fromDate);
       onFilteredResults(fetchedResults); // Pass results to parent component
     } catch (error) {
       console.error('Error fetching search results:', error);

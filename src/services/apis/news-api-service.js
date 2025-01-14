@@ -67,12 +67,11 @@ const NewsApiService = {
     },
 
     // Fetch news by search query and terms
-    searchArticles: async (domain, query) => {
+    searchArticles: async (domain, query, fromDate) => {
         try {
           const response = await fetch(
-            `${BASE_URL}/everything?${domain}q=${encodeURIComponent(query)}&searchIn=title,description&language=en&pageSize=2&apiKey=${API_KEY}`
+              `${BASE_URL}/everything?${domain}q=${encodeURIComponent(query)}&${fromDate}searchIn=title,description&sortBy=relevancy&language=en&pageSize=2&apiKey=${API_KEY}`
           );
-          console.log('search url:', `${BASE_URL}/everything?${domain}q=${encodeURIComponent(query)}&searchIn=title,description&language=en&pageSize=2&apiKey=${API_KEY}`);
           
           const data = await response.json();
       
