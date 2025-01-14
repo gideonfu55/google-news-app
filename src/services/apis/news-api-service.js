@@ -72,12 +72,12 @@ const NewsApiService = {
           const response = await fetch(
             `${BASE_URL}/everything?q=${encodeURIComponent(query)}&language=en&pageSize=5&apiKey=${API_KEY}`
           );
-
           console.log('search url:', `${BASE_URL}/everything?q=${encodeURIComponent(query)}&language=en&pageSize=5&apiKey=${API_KEY}`);
+          
           const data = await response.json();
       
           if (data.status === 'ok') {
-            console.log('Search articles fetched successfully');
+            console.log('Searched articles by params fetched successfully');
             return data.articles;
           } else {
             throw new Error(`API Error: ${data.message}`);
