@@ -7,6 +7,7 @@ import { useCallback, useEffect, useState } from 'react';
 import NewsFeedBox from './components/news-feed-box/news-feed-box.component';
 import NewsSearchFilter from './components/news-search-filter/news-search-filter.component';
 import NavigationBar from './routes/navigation/navigation-bar.component';
+import NewsCategoryRoute from './components/news-category-route/news-category-route.component';
 
 const App = () => {
   
@@ -119,17 +120,6 @@ const App = () => {
       </Routes>
     </Router>
   );
-};
-
-// NewsCategoryRoute Component
-const NewsCategoryRoute = ({ category, articles, fetchCategoryArticles }) => {
-  useEffect(() => {
-    if (articles.length === 0) {
-      fetchCategoryArticles(category);
-    }
-  }, [category, articles, fetchCategoryArticles]);
-
-  return <NewsFeedBox articles={articles} />;
 };
 
 export default App;
