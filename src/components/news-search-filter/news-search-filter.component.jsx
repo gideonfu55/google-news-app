@@ -2,19 +2,18 @@ import { useEffect, useRef, useState } from 'react';
 import { Search, ChevronDown } from 'lucide-react';
 import './news-search-filter.styles.css';
 
-const NewsSearchFilter = ({ 
-  articles = [],
-  activeCategory = 'General',
-  onFilteredResults = () => { }
-}) => {
+import NewsApiService from '../../services/apis/news-api-service';
 
-  // For removing the search filter form when clicking outside of it
-  const filterRef = useRef(null);
-
-  // For toggling the search filter form
-  const [isExpanded, setIsExpanded] = useState(false);
-
-  // Search filter form state
+/**
+ * NewsSearchFilter component to filter news articles based on search criteria.
+ * @param {Function} onFilteredResults - Callback function to return filtered articles
+ * @returns {JSX.Element}
+ * @constructor
+ * @see
+ * Usage in App.js
+ **/
+const NewsSearchFilter = ({ onFilteredResults = () => {} }) => { 
+  // Search filter form state for search parameters
   const [searchParams, setSearchParams] = useState({
     exactPhrase: '',
     hasWords: '',
@@ -23,6 +22,12 @@ const NewsSearchFilter = ({
     dateRange: 'any'
   });
 
+  const [isExpanded, setIsExpanded] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  // For removing the search filter form when clicking outside of it
+  const filterRef = useRef(null);
+
   const dateOptions = [
     { value: 'any', label: 'Any time' },
     { value: 'hour', label: 'Past hour' },
@@ -30,64 +35,6 @@ const NewsSearchFilter = ({
     { value: 'week', label: 'Past week' },
     { value: 'year', label: 'Past year' }
   ];
-
-  const filterArticles = (params) => {
-    if (!articles || !Array.isArray(articles)) {
-      console.warn('Articles prop is missing or invalid');
-      return [];
-    }
-
-    let filtered = articles.filter(article =>
-      article.category.includes(activeCategory)
-    );
-
-    if (params.exactPhrase) {
-      filtered = filtered.filter(article =>
-        article.title.toLowerCase().includes(params.exactPhrase.toLowerCase())
-      );
-    }
-
-    if (params.hasWords) {
-      const words = params.hasWords.split(' ');
-      filtered = filtered.filter(article =>
-        words.some(word => article.title.toLowerCase().includes(word.toLowerCase()))
-      );
-    }
-
-    if (params.excludeWords) {
-      const excludedWords = params.excludeWords.split(' ');
-      filtered = filtered.filter(article =>
-        !excludedWords.some(word => article.title.toLowerCase().includes(word.toLowerCase()))
-      );
-    }
-
-    if (params.website) {
-      filtered = filtered.filter(article =>
-        article.source.name.toLowerCase().includes(params.website.toLowerCase())
-      );
-    }
-
-    if (params.dateRange !== 'any') {
-      const now = new Date();
-      filtered = filtered.filter(article => {
-        const articleDate = new Date(article.publishedAt);
-        switch (params.dateRange) {
-          case 'hour':
-            return (now - articleDate) <= 3600000;
-          case 'day':
-            return (now - articleDate) <= 86400000;
-          case 'week':
-            return (now - articleDate) <= 604800000;
-          case 'year':
-            return (now - articleDate) <= 31536000000;
-          default:
-            return true;
-        }
-      });
-    }
-
-    return filtered;
-  };
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -98,16 +45,41 @@ const NewsSearchFilter = ({
   };
 
   /**
-   * Handle form submission when clicking the Search button.
-   * Filter articles based on the search parameters and call onFilteredResults callback.
+   * 
+   * Handle search filter using NewsApiService based on search parameters
    */
-  const handleSubmit = (e) => {
+  const handleSearch = async (e) => {
     e.preventDefault();
-    const filteredResults = filterArticles(searchParams);
-    if (typeof onFilteredResults === 'function') {
-      onFilteredResults(filteredResults);
+    setLoading(true);
+
+    try {
+      // Build the query from search parameters
+      const queryParts = [];
+      if (searchParams.exactPhrase) {
+        queryParts.push(`"${searchParams.exactPhrase}"`);
+      }
+      if (searchParams.hasWords) {
+        queryParts.push(searchParams.hasWords);
+      }
+      if (searchParams.excludeWords) {
+        const excludedWords = searchParams.excludeWords
+          .split(' ')
+          .map((word) => `-${word}`)
+          .join(' ');
+        queryParts.push(excludedWords);
+      }
+
+      const query = queryParts.join(' ');
+
+      // Fetch articles from API
+      const fetchedResults = await NewsApiService.searchArticles(query);
+      onFilteredResults(fetchedResults); // Pass results to parent component
+    } catch (error) {
+      console.error('Error fetching search results:', error);
+    } finally {
+      setLoading(false);
+      setIsExpanded(false);
     }
-    setIsExpanded(false);
   };
 
   /**
@@ -121,6 +93,7 @@ const NewsSearchFilter = ({
       website: '',
       dateRange: 'any'
     });
+    onFilteredResults([]);
   };
 
   /**
@@ -129,7 +102,7 @@ const NewsSearchFilter = ({
   const handleKeyDown = (e) => {
     if (e.key === 'Enter') {
       e.preventDefault();
-      handleSubmit(e);
+      handleSearch(e);
     }
   };
 
@@ -155,12 +128,11 @@ const NewsSearchFilter = ({
         <Search className="search-filter__icon" />
         <input
           type="text"
-          placeholder="Search for article by title or description"
+          placeholder="Search articles based on title and description"
           className="search-filter__input"
           value={searchParams.hasWords}
-          onChange={(e) => handleInputChange({
-            target: { name: 'hasWords', value: e.target.value }
-          })}
+          name="hasWords"
+          onChange={handleInputChange}
           onKeyDown={handleKeyDown}
         />
         <button
@@ -170,23 +142,17 @@ const NewsSearchFilter = ({
           <ChevronDown
             style={{
               transform: isExpanded ? 'rotate(180deg)' : 'none',
-              transition: 'transform 0.2s'
+              transition: 'transform 0.2s',
             }}
           />
         </button>
       </div>
 
-      {/* Display search filter form when expanded */}
       {isExpanded && (
-        <form onSubmit={handleSubmit} className="search-filter__form">
-          <div className="search-filter__header">
-            Narrow your search results
-          </div>
-
+        <form onSubmit={handleSearch} className="search-filter__form">
           <div className="search-filter__group">
-            <label className="search-filter__label">Exact phrase</label>
+            <label>Exact phrase</label>
             <input
-              className="search-filter__control"
               type="text"
               name="exactPhrase"
               value={searchParams.exactPhrase}
@@ -196,9 +162,8 @@ const NewsSearchFilter = ({
           </div>
 
           <div className="search-filter__group">
-            <label className="search-filter__label">Has words</label>
+            <label>Has words</label>
             <input
-              className="search-filter__control"
               type="text"
               name="hasWords"
               value={searchParams.hasWords}
@@ -208,9 +173,8 @@ const NewsSearchFilter = ({
           </div>
 
           <div className="search-filter__group">
-            <label className="search-filter__label">Exclude words</label>
+            <label>Exclude words</label>
             <input
-              className="search-filter__control"
               type="text"
               name="excludeWords"
               value={searchParams.excludeWords}
@@ -220,9 +184,8 @@ const NewsSearchFilter = ({
           </div>
 
           <div className="search-filter__group">
-            <label className="search-filter__label">Website</label>
+            <label>Website</label>
             <input
-              className="search-filter__control"
               type="text"
               name="website"
               value={searchParams.website}
@@ -232,15 +195,14 @@ const NewsSearchFilter = ({
           </div>
 
           <div className="search-filter__group">
-            <label className="search-filter__label">Date</label>
+            <label>Date range</label>
             <select
-              className="search-filter__select"
               name="dateRange"
               value={searchParams.dateRange}
               onChange={handleInputChange}
               onKeyDown={handleKeyDown}
             >
-              {dateOptions.map(option => (
+              {dateOptions.map((option) => (
                 <option key={option.value} value={option.value}>
                   {option.label}
                 </option>
@@ -249,18 +211,11 @@ const NewsSearchFilter = ({
           </div>
 
           <div className="search-filter__actions">
-            <button
-              className="search-filter__clear"
-              type="button"
-              onClick={handleClear}
-            >
+            <button type="button" onClick={handleClear}>
               Clear
             </button>
-            <button
-              className="search-filter__submit"
-              type="submit"
-            >
-              Search
+            <button type="submit" disabled={loading}>
+              {loading ? 'Searching...' : 'Search'}
             </button>
           </div>
         </form>

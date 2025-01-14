@@ -65,6 +65,26 @@ const NewsApiService = {
             return [];
         }
     },
+
+    // Fetch news by search query and terms: q, from, to, sortBy, language, pageSize
+    searchArticles: async (query) => {
+        try {
+          const response = await fetch(
+            `${BASE_URL}/everything?q=${encodeURIComponent(query)}&language=en&pageSize=10&apiKey=${API_KEY}`
+          );
+          const data = await response.json();
+      
+          if (data.status === 'ok') {
+            console.log('Search articles fetched successfully');
+            return data.articles;
+          } else {
+            throw new Error(`API Error: ${data.message}`);
+          }
+        } catch (error) {
+          console.error('Error fetching search articles:', error);
+          return [];
+        }
+    },
 };
 
 export default NewsApiService;
