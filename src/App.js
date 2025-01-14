@@ -28,7 +28,6 @@ const App = () => {
 
   return (
     <Router>
-      <div className="App">
         {/* Navigation bar to display categories and logo */}
         <NavigationBar />
 
@@ -41,17 +40,19 @@ const App = () => {
           />
         </div>
         
-        {/* Placeholder for development in progress 🙂 */}
-        <header className="App-header">
-          <div style={{ display: 'flex', flexDirection:'column', textAlign: 'center', alignItems: 'center' }}>
-            <img src={logo} className="App-logo" alt="logo" />
-          </div>
-          <p style={{ textAlign: 'center', fontWeight: 'bold' }}>
-            Google News App - Coming Soon
-          </p>
-        </header>
-      </div>
+        {/* Placeholder icon for development in progress 🙂 */}
+        <div className="App">
+          <header className="App-header">
+            <div style={{ display: 'flex', flexDirection:'column', textAlign: 'center', alignItems: 'center' }}>
+              <img src={logo} className="App-logo" alt="logo" />
+            </div>
+            <p style={{ textAlign: 'center', fontWeight: 'bold' }}>
+              Google News App - Coming Soon
+            </p>
+          </header>
+        </div>
 
+      {/* Routes for navigating to different categories of articles based on navigation-bar */}
       <Routes>
         {categories.map((category) => (
           <Route

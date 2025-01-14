@@ -10,7 +10,7 @@ const NavigationBar = () => {
     { id: 'science', label: 'Science' },
     { id: 'health', label: 'Health' },
     { id: 'sports', label: 'Sports' },
-    { id: 'entertainment', label: 'Entertainment' },
+    { id: 'entertainment', label: 'Entertainment' }
   ];
 
   return (

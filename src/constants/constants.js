@@ -5,6 +5,6 @@ export const categories = [
     "science",
     "health",
     "sports",
-    "entertainment",
+    "entertainment"
   ];
   

@@ -22,6 +22,7 @@ const useNewsArticles = () => {
       } else {
         fetchedArticles = await NewsApiService.fetchNewsByCategory(category);
       }
+      
       setCategoryArticles((prev) => ({
         ...prev,
         [category]: fetchedArticles,
