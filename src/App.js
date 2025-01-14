@@ -2,10 +2,10 @@ import logo from './logo.svg';
 import './App.css';
 
 import { categories } from './constants/constants';
-import NewsApiService from './services/apis/news-api-service';
 
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { useCallback, useEffect, useState } from 'react';
+
+import useNewsArticles from './hooks/useNewsArticles';
 import NewsFeedBox from './components/news-feed-box/news-feed-box.component';
 import NewsSearchFilter from './components/news-search-filter/news-search-filter.component';
 import NavigationBar from './routes/navigation/navigation-bar.component';
@@ -13,56 +13,14 @@ import NewsCategoryRoute from './components/news-category-route/news-category-ro
 
 const App = () => {
 
-  const [articles, setArticles] = useState([]);
-  const [categoryArticles, setCategoryArticles] = useState({});
-  const [searchResults, setSearchResults] = useState([]);
-  const [loading, setLoading] = useState(true);
-
-  
-  // Fetch articles for a specific category
-  const fetchCategoryArticles = useCallback(async (category) => {
-    if (categoryArticles[category]?.length > 0) {
-      return; // Skip fetching if articles for the category already exist
-    }
-
-    setLoading(true);
-
-    try {
-      let fetchedArticles;
-      if (category === 'headlines') {
-        fetchedArticles = await NewsApiService.fetchAllNewsHeadlines();
-      } else {
-        fetchedArticles = await NewsApiService.fetchNewsByCategory(category);
-      }
-      setCategoryArticles((prev) => ({
-        ...prev,
-        [category]: fetchedArticles,
-      }));
-    } catch (error) {
-      console.error(`Error fetching articles for category "${category}":`, error);
-    } finally {
-      setLoading(false);
-    }
-  }, [categoryArticles]);
-
-
-  // Fetch all articles for search filter on mount
-  useEffect(() => {
-    const fetchAllArticles = async () => {
-      setLoading(true);
-      try {
-        const fetchedArticles = await NewsApiService.fetchAllNewsHeadlines();
-        setArticles(fetchedArticles);
-        setSearchResults(fetchedArticles);
-      } catch (error) {
-        console.error("Error fetching all news headlines:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchAllArticles();
-  }, []);
-
+  const {
+    articles,
+    categoryArticles,
+    searchResults,
+    loading,
+    fetchCategoryArticles,
+    setSearchResults,
+  } = useNewsArticles();
 
   if (loading) {
     return <div>Loading...</div>;

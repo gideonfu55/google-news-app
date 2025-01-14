@@ -1,5 +1,5 @@
 import { useState, useCallback, useEffect } from 'react';
-import NewsApiService from './services/apis/news-api-service';
+import NewsApiService from '../services/apis/news-api-service';
 
 const useNewsArticles = () => {
   const [articles, setArticles] = useState([]);
