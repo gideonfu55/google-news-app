@@ -1,5 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
+
+import { categories } from './constants/constants';
 import NewsApiService from './services/apis/news-api-service';
 
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
@@ -10,23 +12,13 @@ import NavigationBar from './routes/navigation/navigation-bar.component';
 import NewsCategoryRoute from './components/news-category-route/news-category-route.component';
 
 const App = () => {
-  
-  const categories = [
-    "headlines",
-    "business",
-    "technology",
-    "science",
-    "health",
-    "sports",
-    "entertainment",
-  ];
 
   const [articles, setArticles] = useState([]);
   const [categoryArticles, setCategoryArticles] = useState({});
   const [searchResults, setSearchResults] = useState([]);
   const [loading, setLoading] = useState(true);
 
-
+  
   // Fetch articles for a specific category
   const fetchCategoryArticles = useCallback(async (category) => {
     if (categoryArticles[category]?.length > 0) {
