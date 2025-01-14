@@ -11,6 +11,7 @@ import NewsSearchFilter from './components/news-search-filter/news-search-filter
 import NavigationBar from './routes/navigation/navigation-bar.component';
 import NewsCategoryRoute from './components/news-category-route/news-category-route.component';
 import HomePage from './routes/home/home-page.component';
+import CircleLoaderWidget from './widgets/circle-loader.widget';
 
 const App = () => {
 
@@ -24,7 +25,9 @@ const App = () => {
   } = useNewsArticles();
 
   if (loading) {
-    return <div>Loading...</div>;
+    return (
+      <CircleLoaderWidget isLoading={loading} />
+    );
   }
 
   return (

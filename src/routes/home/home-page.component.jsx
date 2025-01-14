@@ -3,6 +3,7 @@ import NewsFeedBox from '../../components/news-feed-box/news-feed-box.component'
 import NewsApiService from '../../services/apis/news-api-service';
 
 import './home-page.styles.css';
+import CircleLoaderWidget from '../../widgets/circle-loader.widget';
 
 const HomePage = () => {
 
@@ -34,7 +35,11 @@ const HomePage = () => {
     fetchArticles();
   }, []);
 
-  if (loading) return <div>Loading...</div>;
+  if (loading) {
+    return (
+      <CircleLoaderWidget isLoading={loading} />
+    );
+  }
 
   return (
     <div className="home-container">
