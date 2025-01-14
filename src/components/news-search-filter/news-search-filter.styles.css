@@ -104,10 +104,18 @@
   margin-bottom: 4px;
 }
 
-.search-filter__group select {
-  margin-left: 15px;
+.search-filter__select {
+  border: none;
+  border-bottom: 1px solid #dcdcdc;
   font-size: 14px;
-  border: 1px #5f6368;
+  color: #202124;
+  background-color: transparent;
+  outline: none; /* Removes the border highlight when selected */
+  cursor: pointer;
+}
+
+.search-filter__select:focus {
+  outline: none;
 }
 
 .search-filter__control {

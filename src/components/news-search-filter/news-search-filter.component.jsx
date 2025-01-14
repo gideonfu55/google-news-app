@@ -197,6 +197,7 @@ const NewsSearchFilter = ({ onFilteredResults = () => {} }) => {
           <div className="search-filter__group">
             <label>Date range</label>
             <select
+              className='search-filter__select'
               name="dateRange"
               value={searchParams.dateRange}
               onChange={handleInputChange}
