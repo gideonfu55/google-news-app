@@ -130,7 +130,7 @@ const NewsSearchFilter = ({ onFilteredResults = () => {} }) => {
           type="text"
           placeholder="Search articles based on title and description"
           className="search-filter__input"
-          value={searchParams.hasWords}
+          value={searchParams.exactPhrase}
           name="hasWords"
           onChange={handleInputChange}
           onKeyDown={handleKeyDown}

@@ -2,7 +2,7 @@
 
 // API Service for making calls to News API for fetching news feeds & articles for application
 
-const API_KEY = 'a0eea1f1d9ae4758b3c5c83ec27a9a5e'; // to use environment variables for production
+const API_KEY = '43e1a3a1a8934c738b394b92e1ea184d'; // to use environment variables for production
 const BASE_URL = 'https://newsapi.org/v2';
 
 const NewsApiService = {
@@ -72,7 +72,7 @@ const NewsApiService = {
           const response = await fetch(
             `${BASE_URL}/everything?q=${encodeURIComponent(query)}&language=en&pageSize=5&apiKey=${API_KEY}`
           );
-          console.log('search url:', `${BASE_URL}/everything?q=${encodeURIComponent(query)}&language=en&pageSize=5&apiKey=${API_KEY}`);
+        //   console.log('search url:', `${BASE_URL}/everything?q=${encodeURIComponent(query)}&language=en&pageSize=5&apiKey=${API_KEY}`);
           
           const data = await response.json();
       
