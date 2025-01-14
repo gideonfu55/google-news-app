@@ -97,6 +97,11 @@
   margin-bottom: 16px;
 }
 
+.search-filter__group input:focus {
+  border-bottom: 2px solid #1a73e8;
+  outline: none;
+}
+
 .search-filter__group label {
   font-size: 13px;
   color: #5f6368;
