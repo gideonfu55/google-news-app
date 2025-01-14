@@ -196,6 +196,7 @@ const NewsSearchFilter = ({ onFilteredResults = () => {} }) => {
               type="text"
               name="website"
               value={searchParams.website}
+              placeholder='e.g. abcnews.go.com, techcrunch.com, bbc.co.uk'
               onChange={handleInputChange}
               onKeyDown={handleKeyDown}
             />
