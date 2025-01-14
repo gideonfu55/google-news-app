@@ -110,8 +110,9 @@
 }
 
 .search-filter__select {
-  border: none;
-  border-bottom: 1px solid #dcdcdc;
+  border: 1px solid #dcdcdc;
+  padding: 8px 16px;
+  border-radius: 5px;
   font-size: 14px;
   color: #202124;
   background-color: transparent;
