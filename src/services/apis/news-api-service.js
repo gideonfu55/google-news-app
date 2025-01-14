@@ -72,7 +72,7 @@ const NewsApiService = {
           const response = await fetch(
             `${BASE_URL}/everything?q=${encodeURIComponent(query)}&language=en&pageSize=2&apiKey=${API_KEY}`
           );
-          console.log('search url:', `${BASE_URL}/everything?q=${encodeURIComponent(query)}&language=en&pageSize=2&apiKey=${API_KEY}`);
+          console.log('search url:', `${BASE_URL}/everything?q=${encodeURIComponent(query)}&searchIn=title,description&language=en&pageSize=2&apiKey=${API_KEY}`);
           
           const data = await response.json();
       

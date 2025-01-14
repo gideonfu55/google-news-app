@@ -69,6 +69,11 @@ const NewsSearchFilter = ({ onFilteredResults = () => {} }) => {
         queryParts.push(excludedWords);
       }
 
+      // Add website domain to search query
+      if (searchParams.website) {
+        queryParts.push(`domains=${searchParams.website}`);
+      }
+
       const query = queryParts.join(' ');
 
       // Fetch articles from API
