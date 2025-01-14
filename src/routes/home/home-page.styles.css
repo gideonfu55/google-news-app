@@ -1,12 +1,12 @@
 /* Main container for the homepage */
 .home-container {
   display: grid;
-  grid-template-columns: 2fr 1fr; /* Left section takes 2x space compared to right */
+  grid-template-columns: 1.5fr 1fr; /* Left section takes 1.5x space compared to right */
   gap: 16px;
   padding: 16px;
   width: 80%; /* Shrink the main content to 80% of the page width */
   margin: 0 auto; /* Center the container */
-  background-color: #f8f9fa; /* Light background for the page */
+  background-color: #f8f9fa;
 }
 
 /* Left section (main content) */

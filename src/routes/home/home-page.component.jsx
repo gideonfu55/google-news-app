@@ -46,7 +46,7 @@ const HomePage = () => {
         </section>
 
         <section className="news-section">
-          <h2 className="section-title">World News</h2>
+          <h2 className="section-title">Science News</h2>
           <NewsFeedBox articles={worldNews} />
         </section>
       </div>
