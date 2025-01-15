@@ -1,0 +1,38 @@
+/* Container for the category route */
+.category-route-container {
+  width: 55%;
+  padding: 20px;
+  background-color: #f7f7f7;
+  border-radius: 8px;
+  margin: 20px auto;
+  max-width: 1200px;
+}
+
+/* Header with icon and title */
+.category-route-header {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.category-icon {
+  color: #0077c2;
+}
+
+.section-title {
+  font-family: 'Roboto', sans-serif;
+  font-size: 24px;
+  font-weight: bold;
+  margin: 0;
+}
+
+.category-content-section {
+  gap: 16px;
+  padding: 16px;
+  border-radius: 8px;
+  width: 100%; /* Shrink the main content to 80% of the page width */
+  margin: 0 auto;
+  background-color: #ffffff;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+}

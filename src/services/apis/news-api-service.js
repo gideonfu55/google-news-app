@@ -10,7 +10,7 @@
  * - searchArticles: Fetch news by search query and terms
  */
 
-const API_KEY = 'f5daafeef953493ea3d8fcb13c042253'; // to use environment variables for production
+const API_KEY = '03b79ecbc3cf4526971b38a3b7671f07'; // to use environment variables for production
 const BASE_URL = 'https://newsapi.org/v2';
 
 // Add sleep helper

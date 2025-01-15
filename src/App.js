@@ -1,5 +1,4 @@
 // For UI and images
-import logo from './logo.svg';
 import './App.css';
 
 // For Constants and Generating Unique IDs
@@ -45,64 +44,57 @@ const App = () => {
 
   return (
     <Router>
-        {/* Navigation Section to display google news logo, search box, category links */}
-        <NavigationSection 
-          articles={articles}
-          onFilteredResults={(filtered) => {
-            setSearchResults(filtered)
-          }}
-        />
+      {/* Navigation Section to display google news logo, search box, category links */}
+      <NavigationSection 
+        articles={articles}
+        onFilteredResults={(filtered) => {
+          setSearchResults(filtered)
+        }}
+      />
         
-        {/* Placeholder icon for development in progress 🙂 */}
-        <div className="App">
-          <header className="App-header">
-            <div style={{ display: 'flex', flexDirection:'column', textAlign: 'center', alignItems: 'center' }}>
-              <img src={logo} className="App-logo" alt="logo" />
-            </div>
-            <p style={{ textAlign: 'center', fontWeight: 'bold' }}>
-              Google News App - Almost there! 🚀
-            </p>
-          </header>
-        </div>
+      {/* Placeholder icon for development in progress 🙂 */}
+      <div className="App-content">
 
-      {/* Routes for navigating to different categories of articles based on navigation-row */}
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/home" element={<HomePage />} />
+        
+        {/* Routes for navigating to different categories of articles based on navigation-row */}
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/home" element={<HomePage />} />
 
-        {categories.map((category) => (
+          {categories.map((category) => (
+            <Route
+              key={uuidv4()}
+              path={`/${category}`}
+              element={
+                <NewsCategoryRoute
+                  category={category}
+                  articles={categoryArticles[category] || []}
+                  fetchCategoryArticles={fetchCategoryArticles}
+                />
+              }
+            />
+          ))}
+          
+          {/* Default route to display search results */}
           <Route
-            key={uuidv4()}
-            path={`/${category}`}
+            path="/search"
             element={
-              <NewsCategoryRoute
-                category={category}
-                articles={categoryArticles[category] || []}
-                fetchCategoryArticles={fetchCategoryArticles}
-              />
+              searchResults.length > 0 ? (
+                <NewsFeedBox articles={searchResults} />
+              ) : (
+                <div>
+                  {/* Default to HomePage if no search results */}
+                    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '50px', fontFamily: "Roboto, sans-serif" }}>
+                      <h4>No search results found. Displaying homepage as default.</h4>
+                    </div>
+                  <br />
+                  <HomePage />
+                </div>
+              )
             }
           />
-        ))}
-        
-        {/* Default route to display search results */}
-        <Route
-          path="/search"
-          element={
-            searchResults.length > 0 ? (
-              <NewsFeedBox articles={searchResults} />
-            ) : (
-              <div>
-                 {/* Default to HomePage if no search results */}
-                  <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '50px', fontFamily: "Roboto, sans-serif" }}>
-                    <h4>No search results found. Displaying homepage as default.</h4>
-                  </div>
-                <br />
-                <HomePage />
-              </div>
-            )
-          }
-        />
-      </Routes>
+        </Routes>
+      </div>
     </Router>
   );
 };
