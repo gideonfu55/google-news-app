@@ -64,6 +64,7 @@ const App = () => {
 
       {/* Routes for navigating to different categories of articles based on navigation-bar */}
       <Routes>
+        <Route path="/" element={<HomePage />} />
         <Route path="/home" element={<HomePage />} />
 
         {categories.map((category) => (
@@ -89,7 +90,7 @@ const App = () => {
             ) : (
               <div>
                  {/* Default to HomePage if no search results */}
-                <h3>No results were found in search</h3>
+                <h5>No search results found. Displaying default articles.</h5>
                 <br />
                 <HomePage />
               </div>

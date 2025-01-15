@@ -1,6 +1,14 @@
 /* eslint-disable no-unused-vars */
 
-// API Service for making calls to News API for fetching news feeds & articles for application
+/**
+ * News API Service
+ * Purpose: API Service for making calls to News API for fetching news feeds & articles for application
+ * Functions:
+ * - fetchAllNewsHeadlines: Fetch all top news headlines
+ * - fetchAllLocalNews: Fetch all local news headlines
+ * - fetchNewsByCategory: Fetch news by category
+ * - searchArticles: Fetch news by search query and terms
+ */
 
 const API_KEY = 'f5daafeef953493ea3d8fcb13c042253'; // to use environment variables for production
 const BASE_URL = 'https://newsapi.org/v2';
