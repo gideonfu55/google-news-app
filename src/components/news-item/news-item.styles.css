@@ -18,8 +18,8 @@
 }
 
 .news-item__image {
-  width: 10rem;
-  height: 6.5rem;
+  width: 12rem;
+  height: 7.5rem;
   object-fit: cover;
   border-radius: 0.25rem;
   flex-shrink: 0;
@@ -27,6 +27,7 @@
 
 .news-item__content {
   font-family: 'Roboto', sans-serif;
+  padding-right: 1.5rem;
   flex: 1;
   min-width: 0;
 }

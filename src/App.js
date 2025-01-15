@@ -84,7 +84,7 @@ const App = () => {
               ) : (
                 <div>
                   {/* Default to HomePage if no search results */}
-                    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '50px', fontFamily: "Roboto, sans-serif" }}>
+                    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '50px', fontFamily: "Roboto, sans-serif", color: '#cc0000' }}>
                       <h4>No search results found. Displaying homepage as default.</h4>
                     </div>
                   <HomePage />
