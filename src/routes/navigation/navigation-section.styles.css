@@ -1,47 +1,69 @@
-
-
-
-
-/* Base styles for NavigationBar */
-.navigation-bar {
-  font-family: 'GothamPro', sans-serif;
+/* Header container */
+.header {
   width: 100%;
-  max-width: 100%;
+  border-bottom: 1px solid #e0e0e0;
+  background-color: #ffffff;
+  padding: 0 20px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+/* Top bar with logo and search filter */
+.top-bar {
   display: flex;
   align-items: center;
-  padding: 5px 10px;
-  background-color: white;
-  border-bottom: 1px solid #e0e0e0;
-  overflow-x: hidden; /* Prevent horizontal scroll */
+  justify-content: space-between;
+  padding: 10px 0;
 }
 
 /* Logo image */
-.navigation-bar__logo img {
+.top-bar__logo-container {
+  display: flex;
+  align-items: center;
+}
+
+.top-bar_logo img {
   height: 5rem;
   width: 7rem;
   display: inline-block;
 }
 
-/* Home Navigation link - bring to far left */
-.navigation-bar__homenav {
-  padding-left: 20px;
-  margin-right: auto;
-  text-decoration: none;
-  color: #858585;
+/* Search filter container */
+.search-container {
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+
+.news-search-filter {
+  width: 100%;
+  max-width: 600px;
+}
+
+/* Base styles for NavigationRow */
+.navigation-row {
+  font-family: 'GothamPro', sans-serif;
+  width: 100%;
+  max-width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 5px 10px;
+  background-color: white;
+  border-bottom: 1px solid #e0e0e0;
+  overflow-x: hidden;
 }
 
 /* Navigation links container */
-.navigation-bar__nav {
+.navigation-row__nav {
   display: flex;
-  gap: 20px;
-  /* margin-left: 450px; */
+  gap: 50px;
   align-items: center;
   justify-content: center;
-  flex-grow: 0.75;
+  flex-grow: 1;
 }
 
 /* Navigation link styles */
-.navigation-bar__link {
+.navigation-row__link {
   font-size: 16px;
   font-weight: 400;
   color: #858585;
@@ -51,12 +73,12 @@
   cursor: pointer;
 }
 
-.navigation-bar__link:hover {
+.navigation-row__link:hover {
   color: #000000;
 }
 
 /* Active navigation link styles */
-.navigation-bar__link--active {
+.navigation-row__link--active {
   font-weight: 500;
   color: #000000;
   border-bottom: 3px solid #0000ff;

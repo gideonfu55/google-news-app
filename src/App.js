@@ -16,7 +16,6 @@ import NewsCategoryRoute from './components/news-category-route/news-category-ro
 // Components
 import NavigationSection from './routes/navigation/navigation-section.component';
 import NewsFeedBox from './components/news-feed-box/news-feed-box.component';
-import NewsSearchFilter from './components/news-search-filter/news-search-filter.component';
 
 // Custom Hooks
 import useNewsArticles from './hooks/useNewsArticles';
@@ -47,18 +46,12 @@ const App = () => {
   return (
     <Router>
         {/* Navigation Section to display google news logo, search box, category links */}
-        <NavigationSection />
-
-        <br />
-        {/* Search filter to filter news articles based on search criteria */}
-        <div className="search-filter">
-          <NewsSearchFilter
-            articles={articles}
-            onFilteredResults={(filtered) => {
-              setSearchResults(filtered)}
-            }
-          />
-        </div>
+        <NavigationSection 
+          articles={articles}
+          onFilteredResults={(filtered) => {
+            setSearchResults(filtered)
+          }}
+        />
         
         {/* Placeholder icon for development in progress 🙂 */}
         <div className="App">
@@ -72,7 +65,7 @@ const App = () => {
           </header>
         </div>
 
-      {/* Routes for navigating to different categories of articles based on navigation-bar */}
+      {/* Routes for navigating to different categories of articles based on navigation-row */}
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/home" element={<HomePage />} />
@@ -100,14 +93,15 @@ const App = () => {
             ) : (
               <div>
                  {/* Default to HomePage if no search results */}
-                <h5>No search results found. Displaying homepage as default.</h5>
+                  <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '50px', fontFamily: "Roboto, sans-serif" }}>
+                    <h4>No search results found. Displaying homepage as default.</h4>
+                  </div>
                 <br />
                 <HomePage />
               </div>
             )
           }
         />
-
       </Routes>
     </Router>
   );
