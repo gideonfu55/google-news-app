@@ -4,6 +4,7 @@ import './App.css';
 import { categories } from './constants/constants';
 import { v4 as uuidv4 } from 'uuid';
 
+// import { useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 import useNewsArticles from './hooks/useNewsArticles';
@@ -14,7 +15,10 @@ import NewsCategoryRoute from './components/news-category-route/news-category-ro
 import HomePage from './routes/home/home-page.component';
 import CircleLoaderWidget from './widgets/circle-loader.widget';
 
+
 const App = () => {
+
+  // const location = useLocation();
 
   const {
     articles,
@@ -25,6 +29,13 @@ const App = () => {
     setSearchResults,
   } = useNewsArticles();
 
+  // Clear search results when navigating to a new route
+  // useEffect(() => {
+  //   if (location.pathname !== '/') {
+  //     setSearchResults([]);
+  //   }
+  // }, [location, setSearchResults]);
+
   if (loading) {
     return (
       <CircleLoaderWidget isLoading={loading} />
@@ -32,6 +43,10 @@ const App = () => {
   }
 
   console.log('Rendering App with searchResults:', searchResults);
+
+  // For debugging current routes:
+  // console.log('Current Route:', location.pathname);
+  console.log('Search Results State:', searchResults);
 
   return (
     <Router>
@@ -87,7 +102,12 @@ const App = () => {
             searchResults.length > 0 ? (
               <NewsFeedBox articles={searchResults} />
             ) : (
-              <HomePage /> // Default to HomePage if no search results
+              <div>
+                 {/* Default to HomePage if no search results */}
+                <h3>No results were found in search</h3>
+                <br />
+                <HomePage />
+              </div>
             )
           }
         />

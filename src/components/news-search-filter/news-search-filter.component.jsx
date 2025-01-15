@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Search, ChevronDown } from 'lucide-react';
 import './news-search-filter.styles.css';
 
@@ -12,7 +13,11 @@ import NewsApiService from '../../services/apis/news-api-service';
  * @see
  * Usage in App.js
  **/
-const NewsSearchFilter = ({ onFilteredResults = () => {} }) => { 
+const NewsSearchFilter = ({ onFilteredResults = () => {} }) => {
+
+  // Navigation hook for programmatic navigation
+  const navigate = useNavigate();
+
   // Search filter form state for search parameters
   const [searchParams, setSearchParams] = useState({
     exactPhrase: '',
@@ -113,10 +118,13 @@ const NewsSearchFilter = ({ onFilteredResults = () => {} }) => {
       }
 
       const query = queryParts.join(' ');
+      // const query = buildQueryFromParams(searchParams);
 
       // Fetch articles from API
       const fetchedResults = await NewsApiService.searchArticles(domains, query, fromDate);
       onFilteredResults(fetchedResults); // Pass results to parent component
+      navigate('/'); // Navigate to the "/" route for search results
+      
     } catch (error) {
       console.error('Error fetching search results:', error);
     } finally {
