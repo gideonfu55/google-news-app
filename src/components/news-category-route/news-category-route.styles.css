@@ -29,7 +29,8 @@
 
 .category-content-section {
   gap: 16px;
-  padding: 16px;
+  padding: 35px;
+  padding-bottom: 0;
   border-radius: 8px;
   width: 100%; /* Shrink the main content to 80% of the page width */
   margin: 0 auto;

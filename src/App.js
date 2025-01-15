@@ -87,7 +87,6 @@ const App = () => {
                     <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '50px', fontFamily: "Roboto, sans-serif" }}>
                       <h4>No search results found. Displaying homepage as default.</h4>
                     </div>
-                  <br />
                   <HomePage />
                 </div>
               )

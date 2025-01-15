@@ -12,6 +12,7 @@
 
 const API_KEY = '03b79ecbc3cf4526971b38a3b7671f07'; // to use environment variables for production
 const BASE_URL = 'https://newsapi.org/v2';
+const resultSize = 3;
 
 // Add sleep helper
 const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
@@ -21,7 +22,7 @@ const NewsApiService = {
     // Fetch all top news headlines
     fetchAllNewsHeadlines: async () => {
         try {
-            const response = await fetch(`${BASE_URL}/top-headlines?language=en&sortBy=relevancy&pageSize=1&apiKey=${API_KEY}`);
+            const response = await fetch(`${BASE_URL}/top-headlines?language=en&sortBy=relevancy&pageSize=${resultSize}&apiKey=${API_KEY}`);
             const data = await response.json();
 
             if (data.status === 'ok') {
@@ -41,7 +42,7 @@ const NewsApiService = {
     fetchAllLocalNews: async () => {
         try {
             const response = await fetch(
-                `${BASE_URL}/top-headlines?country=sg&language=en&sortBy=relevancy&pageSize=1&apikey=${API_KEY}`
+                `${BASE_URL}/top-headlines?country=sg&language=en&sortBy=relevancy&pageSize=${resultSize}&apikey=${API_KEY}`
             );
             const data = await response.json();
 
@@ -61,7 +62,7 @@ const NewsApiService = {
     fetchNewsByCategory: async (category) => {
         try {
             const response = await fetch(
-                `${BASE_URL}/top-headlines?category=${category}&language=en&pageSize=1&apiKey=${API_KEY}`
+                `${BASE_URL}/top-headlines?category=${category}&language=en&pageSize=${resultSize}&apiKey=${API_KEY}`
             );
             const data = await response.json();
 
@@ -81,7 +82,7 @@ const NewsApiService = {
     searchArticles: async (query) => {
         try {
           const response = await fetch(
-              `${BASE_URL}/everything?${query}searchIn=title,description&sortBy=relevancy&language=en&pageSize=2&apiKey=${API_KEY}`
+              `${BASE_URL}/everything?${query}searchIn=title,description&sortBy=relevancy&language=en&pageSize=${resultSize}&apiKey=${API_KEY}`
           );
           
           const data = await response.json();

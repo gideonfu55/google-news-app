@@ -7,8 +7,14 @@
 .news-item__container {
   display: flex;
   gap: 1.5rem;
-  padding: 1rem;
+  padding: 16px 0;
+  padding-bottom: 25px;
   align-items: flex-start;
+  border-bottom: 1px solid #e3e3e3;
+}
+
+.news-item__container:last-child {
+  border-bottom: none;
 }
 
 .news-item__image {

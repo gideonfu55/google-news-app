@@ -32,7 +32,9 @@ const NewsFeedBox = ({ articles }) => {
           </div>
         ) : (
           filteredArticles.map((article) => (
-            <NewsItem key={uuidv4()} article={article} />
+            <div className="news-item__container" key={article.id || article.title}>
+              <NewsItem key={uuidv4()} article={article} />
+            </div>
           )))
         }
       </div>
