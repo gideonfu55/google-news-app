@@ -4,7 +4,6 @@ import './App.css';
 import { categories } from './constants/constants';
 import { v4 as uuidv4 } from 'uuid';
 
-// import { useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 import useNewsArticles from './hooks/useNewsArticles';
@@ -18,8 +17,6 @@ import CircleLoaderWidget from './widgets/circle-loader.widget';
 
 const App = () => {
 
-  // const location = useLocation();
-
   const {
     articles,
     categoryArticles,
@@ -29,13 +26,6 @@ const App = () => {
     setSearchResults,
   } = useNewsArticles();
 
-  // Clear search results when navigating to a new route
-  // useEffect(() => {
-  //   if (location.pathname !== '/') {
-  //     setSearchResults([]);
-  //   }
-  // }, [location, setSearchResults]);
-
   if (loading) {
     return (
       <CircleLoaderWidget isLoading={loading} />
@@ -43,10 +33,6 @@ const App = () => {
   }
 
   console.log('Rendering App with searchResults:', searchResults);
-
-  // For debugging current routes:
-  // console.log('Current Route:', location.pathname);
-  console.log('Search Results State:', searchResults);
 
   return (
     <Router>
@@ -59,7 +45,6 @@ const App = () => {
           <NewsSearchFilter
             articles={articles}
             onFilteredResults={(filtered) => {
-              console.log('Updating Search Results State:', filtered);
               setSearchResults(filtered)}
             }
           />
@@ -97,7 +82,7 @@ const App = () => {
         
         {/* Default route to display search results */}
         <Route
-          path="/"
+          path="/search"
           element={
             searchResults.length > 0 ? (
               <NewsFeedBox articles={searchResults} />

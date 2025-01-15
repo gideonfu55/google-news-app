@@ -4,8 +4,6 @@ import './new-feed-box.style.css'
 
 const NewsFeedBox = ({ articles }) => {
 
-  console.log('Rendering NewsFeedBox with articles:', articles);
-
   if (!Array.isArray(articles)) {
     console.error('Articles are not in array: ', articles);
     return <div>Unable to load news articles.</div>;

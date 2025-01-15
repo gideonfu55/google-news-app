@@ -70,18 +70,16 @@ const NewsApiService = {
     },
 
     // Fetch news by search query and terms
-    searchArticles: async (domain, query, fromDate) => {
+    searchArticles: async (query) => {
         try {
           const response = await fetch(
-              `${BASE_URL}/everything?${domain}q=${encodeURIComponent(query)}&${fromDate}searchIn=title,description&sortBy=relevancy&language=en&pageSize=2&apiKey=${API_KEY}`
+              `${BASE_URL}/everything?${query}searchIn=title,description&sortBy=relevancy&language=en&pageSize=2&apiKey=${API_KEY}`
           );
-
-          console.log('URL:', `${BASE_URL}/everything?${domain}q=${encodeURIComponent(query)}&${fromDate}searchIn=title,description&sortBy=relevancy&language=en&pageSize=2&apiKey=${API_KEY}`);
           
           const data = await response.json();
       
           if (data.status === 'ok') {
-            console.log('Search articles by params fetched successfully');
+            console.log('Searching articles by params - fetched successfully');
             return data.articles;
           } else {
             throw new Error(`API Error: ${data.message}`);

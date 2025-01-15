@@ -4,6 +4,7 @@ import { Search, ChevronDown } from 'lucide-react';
 import './news-search-filter.styles.css';
 
 import NewsApiService from '../../services/apis/news-api-service';
+import { buildQueryFromParams } from './utils/buildQueryFromParams';
 
 /**
  * NewsSearchFilter component to filter news articles based on search criteria.
@@ -27,24 +28,15 @@ const NewsSearchFilter = ({ onFilteredResults = () => {} }) => {
     dateRange: 'any'
   });
 
-  // Date conversion helper function
-  const getDateFromRange = (range) => {
-    const now = new Date();
-    switch (range) {
-      case 'hour':
-        now.setHours(now.getHours() - 1);
-        break;
-      case 'day':
-        now.setDate(now.getDate() - 1);
-        break;
-      case 'week':
-        now.setDate(now.getDate() - 7);
-        break;
-      default:
-        return null;
-    }
-    return now.toISOString().split('T')[0];
-  };
+  const dateOptions = [
+    { value: 'any', label: 'Any time' },
+    { value: 'hour', label: 'Past hour' },
+    { value: 'day', label: 'Past 24 hours' },
+    { value: 'week', label: 'Past week' },
+  ];
+
+  const [isExpanded, setIsExpanded] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   // Validation for search filter form - search valid if exact phrase or has words are present
   const isSearchValid = () => {
@@ -52,18 +44,9 @@ const NewsSearchFilter = ({ onFilteredResults = () => {} }) => {
     return hasSearchTerms;
   };
 
-  const [isExpanded, setIsExpanded] = useState(false);
-  const [loading, setLoading] = useState(false);
-
   // For removing the search filter form when clicking outside of it
   const filterRef = useRef(null);
 
-  const dateOptions = [
-    { value: 'any', label: 'Any time' },
-    { value: 'hour', label: 'Past hour' },
-    { value: 'day', label: 'Past 24 hours' },
-    { value: 'week', label: 'Past week' },
-  ];
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -74,7 +57,6 @@ const NewsSearchFilter = ({ onFilteredResults = () => {} }) => {
   };
 
   /**
-   * 
    * Handle search filter using NewsApiService based on search parameters
    */
   const handleSearch = async (e) => {
@@ -85,45 +67,12 @@ const NewsSearchFilter = ({ onFilteredResults = () => {} }) => {
     setLoading(true);
 
     try {
-      // Build the query from search parameters
-      let queryParts = [];
-      let domains = '';
-      let fromDate = '';
-
-      if (searchParams.exactPhrase) {
-        queryParts.push(`"${searchParams.exactPhrase}"`);
-      }
-      if (searchParams.hasWords) {
-        queryParts.push(searchParams.hasWords);
-      }
-      if (searchParams.excludeWords) {
-        const excludedWords = searchParams.excludeWords
-          .split(' ')
-          .map((word) => `-${word}`)
-          .join(' ');
-        queryParts.push(excludedWords);
-      }
-
-      // Add website domain to search query
-      if (searchParams.website) {
-        domains = 'domains=' + searchParams.website + '&';
-      }
-
-      // Add date range to search query
-      if (searchParams.dateRange !== 'any') {
-        const date = getDateFromRange(searchParams.dateRange);
-        if (date) {
-          fromDate = `from=${date}&`;
-        }
-      }
-
-      const query = queryParts.join(' ');
-      // const query = buildQueryFromParams(searchParams);
+      const query = buildQueryFromParams(searchParams);
 
       // Fetch articles from API
-      const fetchedResults = await NewsApiService.searchArticles(domains, query, fromDate);
-      onFilteredResults(fetchedResults); // Pass results to parent component
-      navigate('/'); // Navigate to the "/" route for search results
+      const fetchedResults = await NewsApiService.searchArticles(query);
+      onFilteredResults(fetchedResults); 
+      navigate('/search');
       
     } catch (error) {
       console.error('Error fetching search results:', error);
@@ -158,7 +107,7 @@ const NewsSearchFilter = ({ onFilteredResults = () => {} }) => {
   };
 
   /**
-   * Close the search filter form when clicking outside of it.
+   * Effect to close the search filter form when clicking outside of it.
    */
   useEffect(() => {
     const handleClickOutside = (event) => {
