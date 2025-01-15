@@ -90,7 +90,7 @@ const App = () => {
             ) : (
               <div>
                  {/* Default to HomePage if no search results */}
-                <h5>No search results found. Displaying default articles.</h5>
+                <h5>No search results found. Displaying homepage as default.</h5>
                 <br />
                 <HomePage />
               </div>
