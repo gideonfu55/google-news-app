@@ -9,7 +9,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import useNewsArticles from './hooks/useNewsArticles';
 import NewsFeedBox from './components/news-feed-box/news-feed-box.component';
 import NewsSearchFilter from './components/news-search-filter/news-search-filter.component';
-import NavigationBar from './routes/navigation/navigation-bar.component';
+import NavigationBar from './routes/navigation/navigation-section.component';
 import NewsCategoryRoute from './components/news-category-route/news-category-route.component';
 import HomePage from './routes/home/home-page.component';
 import CircleLoaderWidget from './widgets/circle-loader.widget';

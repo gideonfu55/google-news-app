@@ -1,5 +1,5 @@
 import { NavLink } from 'react-router-dom';
-import './navigation-bar.styles.css';
+import './navigation-section.styles.css';
 import logo from '../../assets/images/google_news_logo.png';
 
 const NavigationBar = () => {
@@ -10,10 +10,10 @@ const NavigationBar = () => {
     { id: 'headlines', label: 'Headlines' },
     { id: 'business', label: 'Business' },
     { id: 'technology', label: 'Technology' },
-    { id: 'science', label: 'Science' },
-    { id: 'health', label: 'Health' },
+    { id: 'entertainment', label: 'Entertainment' },
     { id: 'sports', label: 'Sports' },
-    { id: 'entertainment', label: 'Entertainment' }
+    { id: 'science', label: 'Science' },
+    { id: 'health', label: 'Health' }
   ];
 
   return (
