@@ -1,17 +1,27 @@
+// For UI and images
 import logo from './logo.svg';
 import './App.css';
 
-import { categories } from './constants/constants';
+// For Constants and Generating Unique IDs
+import { categories } from './constants/categories';
 import { v4 as uuidv4 } from 'uuid';
 
+// For Routing
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
-import useNewsArticles from './hooks/useNewsArticles';
+// For Navigation
+import HomePage from './routes/home/home-page.component';
+import NewsCategoryRoute from './components/news-category-route/news-category-route.component';
+
+// Components
+import NavigationSection from './routes/navigation/navigation-section.component';
 import NewsFeedBox from './components/news-feed-box/news-feed-box.component';
 import NewsSearchFilter from './components/news-search-filter/news-search-filter.component';
-import NavigationBar from './routes/navigation/navigation-section.component';
-import NewsCategoryRoute from './components/news-category-route/news-category-route.component';
-import HomePage from './routes/home/home-page.component';
+
+// Custom Hooks
+import useNewsArticles from './hooks/useNewsArticles';
+
+// For Loader
 import CircleLoaderWidget from './widgets/circle-loader.widget';
 
 
@@ -36,8 +46,8 @@ const App = () => {
 
   return (
     <Router>
-        {/* Navigation bar to display categories and logo */}
-        <NavigationBar />
+        {/* Navigation Section to display google news logo, search box, category links */}
+        <NavigationSection />
 
         <br />
         {/* Search filter to filter news articles based on search criteria */}

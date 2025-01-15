@@ -2,7 +2,7 @@ import { NavLink } from 'react-router-dom';
 import './navigation-section.styles.css';
 import logo from '../../assets/images/google_news_logo.png';
 
-const NavigationBar = () => {
+const NavigationSection = () => {
 
   const home = { id: 'home', label: 'Home' };
 
@@ -17,6 +17,9 @@ const NavigationBar = () => {
   ];
 
   return (
+
+
+
     // Navigation bar to display categories and logo
     <div className="navigation-bar">
       <div className="navigation-bar__logo-container">
@@ -46,4 +49,4 @@ const NavigationBar = () => {
   );
 };
 
-export default NavigationBar;
+export default NavigationSection;
