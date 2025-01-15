@@ -48,12 +48,12 @@ const HomePage = () => {
       {/* Left Section */}
       <div className="home-main">
         <section className="news-section">
-          <h2 className="section-title">Top Stories</h2>
+          <h2 className="home-section-title">Top Stories</h2>
           <NewsFeedBox articles={topStories} />
         </section>
 
         <section className="news-section">
-          <h2 className="section-title">Science News</h2>
+          <h2 className="home-section-title">Science News</h2>
           <NewsFeedBox articles={scienceNews} />
         </section>
       </div>
@@ -61,7 +61,7 @@ const HomePage = () => {
       {/* Right Section */}
       <div className="home-sidebar">
         <section className="news-section">
-          <h2 className="section-title">Picks for You</h2>
+          <h2 className="home-section-title">Picks for You</h2>
           <NewsFeedBox articles={picksForYou} />
         </section>
       </div>

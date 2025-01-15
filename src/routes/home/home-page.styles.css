@@ -32,10 +32,11 @@
 }
 
 /* Section title */
-.section-title {
+.home-section-title {
+  font-family: 'Roboto', sans-serif;
   font-size: 1.25rem;
+  padding-left: 10px;
   font-weight: 600;
-  margin-bottom: 12px;
   color: #202124; /* Slightly darker grey for titles */
 }
 

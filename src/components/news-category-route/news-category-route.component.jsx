@@ -39,7 +39,7 @@ const NewsCategoryRoute = ({ category, articles, fetchCategoryArticles }) => {
   return (
     <div className="category-route-container">
       <div className="category-route-header">
-        <Icon className="category-icon" />
+        <Icon className="category-icon" style={{ fontSize: '50px' }} />
         <h2 className="section-title">{capitalizeFirstLetter(category)}</h2>
       </div>
       <div className="category-content-section">
