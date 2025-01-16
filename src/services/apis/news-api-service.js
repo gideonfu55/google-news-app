@@ -13,7 +13,7 @@
 import { API_KEYS } from './api-keys-list';
 
 const BASE_URL = 'https://newsapi.org/v2';
-const resultSize = 3;
+const resultSize = 1;
 
 let currentKeyIndex = 0;
 
@@ -141,6 +141,8 @@ const NewsApiService = {
 
         try {
             const API_KEY = await testFetchForApiKey();
+
+            delay(1500); // Delay before fetching to avoid rate limits
             const response = await fetch(
                 `${BASE_URL}/everything?${query}searchIn=title,description&sortBy=relevancy&language=en&pageSize=${resultSize}&apiKey=${API_KEY}`
             );

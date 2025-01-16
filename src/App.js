@@ -14,7 +14,7 @@ import NewsCategoryRoute from './components/news-category-route/news-category-ro
 
 // Components
 import NavigationSection from './routes/navigation/navigation-section.component';
-import NewsFeedBox from './components/news-feed-box/news-feed-box.component';
+import SearchResultsRoute from './routes/search-results/search-results-route.component';
 
 // Custom Hooks
 import useNewsArticles from './hooks/useNewsArticles';
@@ -55,7 +55,6 @@ const App = () => {
       {/* Placeholder icon for development in progress 🙂 */}
       <div className="App-content">
 
-        
         {/* Routes for navigating to different categories of articles based on navigation-row */}
         <Routes>
           <Route path="/" element={<HomePage />} />
@@ -79,17 +78,10 @@ const App = () => {
           <Route
             path="/search"
             element={
-              searchResults.length > 0 ? (
-                <NewsFeedBox articles={searchResults} />
-              ) : (
-                <div>
-                  {/* Default to HomePage if no search results */}
-                    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '50px', fontFamily: "Roboto, sans-serif", color: '#cc0000' }}>
-                      <h4>No search results found. Displaying homepage as default.</h4>
-                    </div>
-                  <HomePage />
-                </div>
-              )
+              <SearchResultsRoute
+                loading={loading} // Pass the loading state
+                searchResults={searchResults}
+              />
             }
           />
         </Routes>
