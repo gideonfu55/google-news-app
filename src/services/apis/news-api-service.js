@@ -13,7 +13,7 @@
 import { API_KEYS } from './api-keys-list';
 
 const BASE_URL = 'https://newsapi.org/v2';
-const resultSize = 1;
+const resultSize = 5;
 
 let currentKeyIndex = 0;
 
@@ -163,6 +163,3 @@ const NewsApiService = {
 };
 
 export default NewsApiService;
-
-
-
