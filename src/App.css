@@ -1,6 +1,7 @@
 .App-content {
   background-color: #f4f7ff;
-  height: 100vh;
+  height: 100%;
   padding-top: 30px;
+  padding-bottom: 30px;
 }
 
