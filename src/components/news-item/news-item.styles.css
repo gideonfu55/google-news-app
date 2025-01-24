@@ -7,7 +7,7 @@
 .news-item__container {
   display: flex;
   gap: 1.5rem;
-  padding: 16px 32px;
+  padding: 16px 0;
   padding-bottom: 25px;
   align-items: flex-start;
   border-bottom: 1px solid #e3e3e3;
