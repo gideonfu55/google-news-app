@@ -4,6 +4,7 @@ import NewsFeedBox from '../news-feed-box/news-feed-box.component';
 import {
   Article as ArticleIcon,
   BusinessCenter as BusinessIcon,
+  SsidChartTwoTone as StocksIcon,
   Computer as TechnologyIcon,
   Movie as EntertainmentIcon,
   SportsSoccer as SportsIcon,
@@ -16,6 +17,7 @@ import './news-category-route.styles.css';
 const categoryIcons = {
   headlines: ArticleIcon,
   business: BusinessIcon,
+  stocks: StocksIcon,
   technology: TechnologyIcon,
   entertainment: EntertainmentIcon,
   sports: SportsIcon,

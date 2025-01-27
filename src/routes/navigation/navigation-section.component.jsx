@@ -10,6 +10,7 @@ const NavigationSection = ({ articles, onFilteredResults }) => {
   const categories = [
     { id: 'headlines', label: 'Headlines' },
     { id: 'business', label: 'Business' },
+    { id: 'stocks', label: 'Stocks' },
     { id: 'technology', label: 'Technology' },
     { id: 'entertainment', label: 'Entertainment' },
     { id: 'sports', label: 'Sports' },

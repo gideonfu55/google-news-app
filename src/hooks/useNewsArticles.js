@@ -10,7 +10,7 @@ const useNewsArticles = () => {
   // Fetch articles for a specific category
   const fetchCategoryArticles = useCallback(async (category) => {
     if (categoryArticles[category]?.length > 0) {
-      return; // Skip fetching if articles for the category already exist
+      return; // Skip fetching if articles for the category already exist, save API calls
     }
 
     setLoading(true);

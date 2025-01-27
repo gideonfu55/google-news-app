@@ -119,9 +119,19 @@ const NewsApiService = {
 
         try {
             const API_KEY = await testFetchForApiKey();
-            const response = await fetch(
-                `${BASE_URL}/top-headlines?category=${category}&language=en&pageSize=${resultSize}&apiKey=${API_KEY}`
-            );
+            var response = await fetch();
+
+            // Fetch response specifically for stock market from site - investors.com (IBD):
+            if (category === 'stocks') {
+                response = await fetch(
+                    `${BASE_URL}/everything?domains=investors.com&sortBy=relevancy&language=en&pageSize=${resultSize}&apiKey=${API_KEY}`
+                );
+            } else {
+                response = await fetch(
+                    `${BASE_URL}/top-headlines?category=${category}&language=en&pageSize=${resultSize}&apiKey=${API_KEY}`
+                );
+            }
+
             const data = await response.json();
 
             if (data.status === 'ok') {
