@@ -48,14 +48,14 @@ const testFetchForApiKey = async () => {
   
         if (data.status === 'ok') {
           console.log('Valid API Key:', apiKey);
-          return apiKey; // Return the valid API key
+          return apiKey;
         }
   
         // Use only for News API due to unique data code for errors
         if (data.code === 'rateLimited' || data.code === 'apiKeyExhausted') {
           console.warn(`API Key limit reached: ${apiKey}. Rotating...`);
-          rotateApiKey(); // Move to the next key
-          await delay(1000); // Delay before trying again
+          rotateApiKey();
+          await delay(1000);
         } else {
           throw new Error(`Unexpected API Error: ${data.message}`);
         }
@@ -151,8 +151,8 @@ const NewsApiService = {
 
         try {
             const API_KEY = await testFetchForApiKey();
-
-            delay(1500); // Delay before fetching to avoid rate limits
+            delay(1500);
+            
             const response = await fetch(
                 `${BASE_URL}/everything?${query}searchIn=title,description&sortBy=relevancy&language=en&pageSize=${resultSize}&apiKey=${API_KEY}`
             );
