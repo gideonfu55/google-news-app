@@ -126,6 +126,7 @@ const NewsApiService = {
                 response = await fetch(
                     `${BASE_URL}/everything?domains=investors.com&sortBy=relevancy&language=en&pageSize=${resultSize}&apiKey=${API_KEY}`
                 );
+            // Fetch response for other categories:
             } else {
                 response = await fetch(
                     `${BASE_URL}/top-headlines?category=${category}&language=en&pageSize=${resultSize}&apiKey=${API_KEY}`
