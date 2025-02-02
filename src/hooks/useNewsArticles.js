@@ -34,14 +34,38 @@ const useNewsArticles = () => {
     }
   }, [categoryArticles]);
 
-  // Fetch all articles for search filter on mount
+  // Fetch all articles for search filter on mount (for loading headlines when the app starts)
   useEffect(() => {
     const fetchAllArticles = async () => {
       setLoading(true);
+
       try {
+        // Implement caching to avoid fetching all news headlines on every page load
+        const cachedData = localStorage.getItem('cachedHeadlines');
+        const cacheTimestamp = localStorage.getItem('cacheTimestamp');
+        const cacheDuration = 30 * 60 * 1000; // 30 mins in milliseconds
+
+        // Check if cache is still present
+        if (cachedData && cacheTimestamp && Date.now() - cacheTimestamp < cacheDuration) {
+          console.log('Using cached headlines currently. Expiring in:', (cacheDuration - (Date.now() - cacheTimestamp)) / 1000 / 60, 'minutes');
+        
+          setArticles(JSON.parse(cachedData));
+          setSearchResults(JSON.parse(cachedData));
+          setLoading(false);
+          return;
+        }
+
+        console.log('Local storage not found.')
+        
+        // Fetch new headlines if cache expired or is not present
         const fetchedArticles = await NewsApiService.fetchAllNewsHeadlines();
+
         setArticles(fetchedArticles);
         setSearchResults(fetchedArticles);
+
+        // Then store in cache with timestamp
+        localStorage.setItem('cachedHeadlines', JSON.stringify(fetchedArticles));
+        localStorage.setItem('cacheTimestamp', Date.now());
       } catch (error) {
         console.error("Error fetching all news headlines:", error);
       } finally {
