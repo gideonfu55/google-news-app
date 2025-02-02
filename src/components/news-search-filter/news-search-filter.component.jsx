@@ -5,6 +5,7 @@ import './news-search-filter.styles.css';
 
 import NewsApiService from '../../services/apis/news-api-service';
 import { buildQueryFromParams } from './utils/buildQueryFromParams';
+import { NEWS_SOURCES } from '../../constants/newsSources';
 
 /**
  * NewsSearchFilter component to filter news articles based on search criteria.
@@ -188,14 +189,19 @@ const NewsSearchFilter = ({ onFilteredResults, setLoading, loading }) => {
 
           <div className="search-filter__group">
             <label>Website</label>
-            <input
-              type="text"
+            <select
+              className='search-filter__select'
               name="website"
               value={searchParams.website}
-              placeholder='e.g. abcnews.go.com, techcrunch.com, bbc.co.uk'
               onChange={handleInputChange}
-              onKeyDown={handleKeyDown}
-            />
+            >
+              <option value="">Select a news source</option>
+              {NEWS_SOURCES.map((source) => (
+                <option key={source.id} value={source.url}>
+                  {source.name}
+                </option>
+              ))}
+            </select>
           </div>
 
           <div className="search-filter__group">
