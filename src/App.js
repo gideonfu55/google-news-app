@@ -30,6 +30,7 @@ const App = () => {
     categoryArticles,
     searchResults,
     loading,
+    setLoading,
     fetchCategoryArticles,
     setSearchResults,
   } = useNewsArticles();
@@ -50,6 +51,8 @@ const App = () => {
         onFilteredResults={(filtered) => {
           setSearchResults(filtered)
         }}
+        loading={loading}
+        setLoading={setLoading}
       />
         
       {/* Placeholder icon for development in progress 🙂 */}

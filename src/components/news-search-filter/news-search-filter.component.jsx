@@ -14,7 +14,7 @@ import { buildQueryFromParams } from './utils/buildQueryFromParams';
  * @see
  * Usage in App.js
  **/
-const NewsSearchFilter = ({ onFilteredResults = () => {} }) => {
+const NewsSearchFilter = ({ onFilteredResults, setLoading, loading }) => {
 
   // Navigation hook for programmatic navigation
   const navigate = useNavigate();
@@ -36,7 +36,6 @@ const NewsSearchFilter = ({ onFilteredResults = () => {} }) => {
   ];
 
   const [isExpanded, setIsExpanded] = useState(false);
-  const [loading, setLoading] = useState(false);
 
   // Validation for search filter form - search valid if exact phrase or has words are present
   const isSearchValid = () => {
@@ -64,7 +63,10 @@ const NewsSearchFilter = ({ onFilteredResults = () => {} }) => {
     if (!isSearchValid()) {
       return;
     }
+
+    console.log('🔄 Search started, setting loading to TRUE');
     setLoading(true);
+    console.log('✅ NewsSearchFilter - loading state:', loading);
 
     try {
       const query = buildQueryFromParams(searchParams);
@@ -78,6 +80,7 @@ const NewsSearchFilter = ({ onFilteredResults = () => {} }) => {
       console.error('Error fetching search results:', error);
     } finally {
       setLoading(false);
+      console.log('🔄 Search completed, setting loading to FALSE');
       setIsExpanded(false);
     }
   };

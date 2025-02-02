@@ -3,6 +3,7 @@ import NewsFeedBox from '../../components/news-feed-box/news-feed-box.component'
 import HomePage from '../home/home-page.component';
 
 const SearchResultsRoute = ({ loading, searchResults }) => {
+  console.log('SearchResultsRoute - loading state', loading);
     
   if (loading) {
     return <CircleLoaderWidget isLoading={loading} />;

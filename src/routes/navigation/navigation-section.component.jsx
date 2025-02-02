@@ -3,7 +3,7 @@ import './navigation-section.styles.css';
 import logo from '../../assets/images/google_news_logo.png';
 import NewsSearchFilter from '../../components/news-search-filter/news-search-filter.component';
 
-const NavigationSection = ({ articles, onFilteredResults }) => {
+const NavigationSection = ({ articles, onFilteredResults, setLoading, loading }) => {
 
   const home = { id: 'home', label: 'Home' };
 
@@ -31,6 +31,8 @@ const NavigationSection = ({ articles, onFilteredResults }) => {
           <NewsSearchFilter 
             articles={articles}
             onFilteredResults={onFilteredResults}
+            setLoading={setLoading}
+            loading={loading}
           />
         </div>
       </div>

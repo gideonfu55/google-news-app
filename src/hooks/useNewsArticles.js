@@ -80,6 +80,7 @@ const useNewsArticles = () => {
     categoryArticles,
     searchResults,
     loading,
+    setLoading,
     fetchCategoryArticles,
     setSearchResults,
   };
