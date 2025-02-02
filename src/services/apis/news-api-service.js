@@ -119,7 +119,7 @@ const NewsApiService = {
 
         try {
             const API_KEY = await testFetchForApiKey();
-            var response = await fetch();
+            var response = null;
 
             // Fetch response specifically for stock market from site - investors.com (IBD):
             if (category === 'stocks') {
