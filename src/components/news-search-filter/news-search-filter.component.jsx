@@ -195,7 +195,7 @@ const NewsSearchFilter = ({ onFilteredResults, setLoading, loading }) => {
               value={searchParams.website}
               onChange={handleInputChange}
             >
-              <option value="">Select a news source</option>
+              <option value="" disabled>Select a news source</option>
               {NEWS_SOURCES.map((source) => (
                 <option key={source.id} value={source.url}>
                   {source.name}
