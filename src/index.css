@@ -15,9 +15,9 @@ code {
 /* Footer Container */
 footer {
   width: 100%;
-  background-color: #000000;
-  /* color: #000000; */ /* for white background */
-  color: #ffffff;
+  background-color: #edf1fe;
+  color: #000000; /* for white background */
+  /* color: #ffffff; */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -33,8 +33,8 @@ footer {
 
 /* Footer Links */
 footer a {
-  color: #fbbc05;
-  /* color: #007bff; */
+  /* color: #fbbc05; */
+  color: #007bff;
   text-decoration: none;
   font-weight: 500;
   transition: color 0.3s ease-in-out; /* for white background */
