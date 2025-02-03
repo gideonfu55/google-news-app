@@ -22,7 +22,7 @@ You may also see any lint errors in the console.
 
 Please create your API Keys at [News API](https://newsapi.org/register).\
 Then, create a js file a the following path and filename: src/services/apis/api-keys-list.js \
-Lastly, add your keys in the following block in this file: \
+Lastly, add your keys in the following block in this file:
 
 ```js
   export const API_KEYS = [
