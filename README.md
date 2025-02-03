@@ -18,10 +18,10 @@ Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 The page will reload when you make changes.\
 You may also see any lint errors in the console.
 
-## API Keys
+## Instruction for Creating and Adding API Keys to Application
 
-Please create your API Keys at [News API](https://newsapi.org/register).\
-Then, create a js file using the following path and filename: src/services/apis/api-keys-list.js \
+Please create your API Keys by registering your account at [News API](https://newsapi.org/register).\
+Next, create a js file using the following path and filename: src/services/apis/api-keys-list.js \
 \
 Lastly, add your keys in the following block in this file:
 
