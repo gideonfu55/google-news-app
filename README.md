@@ -20,10 +20,10 @@ You may also see any lint errors in the console.
 
 ## Steps for Creating and Adding API Keys to this App
 
-Please create your API Keys by registering your account at [News API](https://newsapi.org/register).\
+Please create/register your account and API Keys at [News API](https://newsapi.org/register).\
 Next, create a js file using the following path and filename: src/services/apis/api-keys-list.js \
 \
-Lastly, add your keys in the following block in this file:
+Lastly, add your keys using following code block in the api-keys-list.js file, where <Key1>, <Key2> and so on are the api keys you have registered on News API:
 
 ```js
   export const API_KEYS = [
